@@ -1,7 +1,39 @@
+using Serilog;
+using Rotativa.AspNetCore;
+using Movie_Rating.Repositories.DataAccess;
+using Movie_Rating.RepositoryContracts;
+using Movie_Rating.Repositories;
+using Movie_Rating.ServiceContracts;
+using Movie_Rating.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDataRepository, DataRepository>();
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
+builder.Services.AddScoped<IMoviesGetterServices, MoviesGetterService>();
+builder.Services.AddScoped<IMoviesUpdaterServices, MoviesUpdaterService>();
+builder.Services.AddScoped<IMoviesDeleterServices, MoviesDeleterService>();
+//Serilog
+builder.Host.UseSerilog((HostBuilderContext context,
+	IServiceProvider services, LoggerConfiguration loggerConfiguration) =>
+{
+	loggerConfiguration
+	.ReadFrom.Configuration(context.Configuration) //read configuration settings from built-in IConfiguration
+	.ReadFrom.Services(services); //read out current app's services and make them available to serilog
+});
+
+builder.Services.AddHttpLogging(options =>
+{
+	options.LoggingFields =
+	Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties |
+	Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestPropertiesAndHeaders;
+});
+
+Rotativa.AspNetCore.RotativaConfiguration.Setup("wwwroot", wkhtmltopdfRelativePath: "Rotativa");
+
 
 var app = builder.Build();
 

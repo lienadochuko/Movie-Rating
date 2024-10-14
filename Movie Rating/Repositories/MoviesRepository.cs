@@ -1,4 +1,4 @@
-﻿using ContactsManager.Core.Helpers;
+﻿using Movie_Rating.Helpers;
 using Microsoft.Extensions.Configuration;
 using Movie_Rating.Models.DTO;
 using Movie_Rating.Repositories.DataAccess;

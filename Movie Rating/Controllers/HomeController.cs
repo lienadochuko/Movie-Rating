@@ -1,22 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Movie_Rating.Models;
+using Movie_Rating.ServiceContracts;
+using Movie_Rating.Models;
 using System.Diagnostics;
 
 namespace Movie_Rating.Controllers
 {
-    public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+    public class HomeController(ILogger<HomeController> _logger, IMoviesGetterServices moviesGetterServices) : Controller
+    {       
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
 			ViewBag.Action = "Home";
-			return View();
+			IEnumerable<FilmDTO> film = await moviesGetterServices.GetAllFilms(cancellationToken);
+			return View(film);
         }
 
         public IActionResult Privacy()

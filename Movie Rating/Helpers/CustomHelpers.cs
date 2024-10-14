@@ -1,4 +1,4 @@
-﻿using ContactsManager.Core.Exceptions;
+﻿using Movie_Rating.Exceptions;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 
-namespace ContactsManager.Core.Helpers
+namespace Movie_Rating.Helpers
 {
     public static partial class CustomHelpers
     {

@@ -10,9 +10,8 @@ using OfficeOpenXml.Drawing;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics.Metrics;
-using ContactsManager.Core.Helpers;
-using ContactsManager.Core.Domain.RepositoryContracts;
 using Movie_Rating.ServiceContracts;
+using Movie_Rating.RepositoryContracts;
 using Movie_Rating.Models.DTO;
 using Movie_Rating.Helpers;
 
