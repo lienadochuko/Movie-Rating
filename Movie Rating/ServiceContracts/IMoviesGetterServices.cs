@@ -19,6 +19,7 @@ namespace Movie_Rating.ServiceContracts
         /// </summary>
         /// <returns>Returns a list of object of FilmDTO type</returns>
         Task<IEnumerable<FilmDTO>> GetAllFilms(CancellationToken cancellationToken);
+       
 
         ///// <summary>
         ///// Returns the actor object based on the given actor id

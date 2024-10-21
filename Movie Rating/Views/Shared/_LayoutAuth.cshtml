@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+    <link rel="stylesheet" href="~/StyleSheet.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+
+
+    <!-- Icons css -->
+    <link href="~/css/icons.css" rel="stylesheet">
+
+    <!--  bootstrap css-->
+    <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--- Style css --->
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style-dark.css" rel="stylesheet">
+    <link href="~/css/style-transparent.css" rel="stylesheet">
+
+    <!-- INTERNAL Select2 css -->
+    <link href="~/plugins/select2/css/select2.min.css" rel="stylesheet" />
+
+    <!---Skinmodes css-->
+    <link href="~/css/skin-modes.css" rel="stylesheet" />
+
+    <!--- Animations css-->
+    <link href="~/css/animate.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        @* <div class="page-content"> *@
+            <div class="margin-bottom w-100">
+                <div class="flex app-title" id="top-bar-div" style="border-bottom-left-radius:15px; border-bottom-right-radius:15px;">
+                    <div class="flex-1" id="app-title-div">
+                        <h1>
+                            @* <i class="fa-solid fa-people-simple"></i> *@
+                            <img src="~/imageIcons/medium/images (3).png" alt="logo" style="height:50px; width:50px;" />
+                            Eris
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+            <div class="body">
+                @RenderBody()
+            </div>
+        @* </div> *@
+    </div>
+
+    <!-- JQuery min js -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap js -->
+    <script src="~/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Ionicons js -->
+    <script src="~/plugins/ionicons/ionicons.js"></script>
+
+    <!-- Moment js -->
+    <script src="~/plugins/moment/moment.js"></script>
+    @*
+    <!-- P-scroll js -->
+    <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/plugins/perfect-scrollbar/p-scroll.js"></script> *@
+
+
+    <!-- INTERNAL Select2 js -->
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+
+    <!-- Sticky js -->
+    <script src="~/js/sticky.js"></script>
+
+    <!-- eva-icons js -->
+    <script src="~/js/eva-icons.min.js"></script>
+
+    <!-- Theme Color js -->
+    <script src="~/js/themecolor.js"></script>
+
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+    <script src="~/Submit.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

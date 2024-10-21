@@ -11,11 +11,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpContextAccessor();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddScoped<IDataRepository, DataRepository>();
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 builder.Services.AddScoped<IMoviesGetterServices, MoviesGetterService>();
 builder.Services.AddScoped<IMoviesUpdaterServices, MoviesUpdaterService>();
 builder.Services.AddScoped<IMoviesDeleterServices, MoviesDeleterService>();
+builder.Services.AddScoped<ISignInService, SignInService>();
+
 //Serilog
 builder.Host.UseSerilog((HostBuilderContext context,
 	IServiceProvider services, LoggerConfiguration loggerConfiguration) =>
@@ -54,6 +70,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();
