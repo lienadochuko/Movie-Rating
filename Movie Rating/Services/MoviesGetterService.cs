@@ -26,10 +26,10 @@ namespace Movie_Rating.Services
         ISignInService signInService, IConfiguration configuration,
         IHttpContextAccessor _httpContextAccessor) : IMoviesGetterServices
     {       
-        public async Task<IEnumerable<FilmDTO>> GetAllFilms(CancellationToken cancellationToken)
+        public async Task<IEnumerable<FilmDTO>> GetAllFilms(CancellationToken cancellationToken,int pageNumber,int pageSize)
 		{
-			string apiUrl = "http://localhost:5119/Movies/GETFILMS";
-            string bearerToken = GetTokenFromCookies();
+			string apiUrl = $"http://localhost:5119/Movies/GETFILMS?pageNumber={pageNumber}&pageSize={pageSize}";
+			string bearerToken = GetTokenFromCookies();
 
             using (HttpClient client = new HttpClient())
             {

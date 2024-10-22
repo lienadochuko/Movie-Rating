@@ -12,9 +12,7 @@ namespace Movie_Rating.Controllers
     public class HomeController(ILogger<HomeController> _logger, IMoviesGetterServices moviesGetterServices) : Controller
     {
         public async Task<IActionResult> Index(Object user, CancellationToken cancellationToken, int page = 1, int pageSize = 10)
-        {
-            
-
+        {   
             ViewBag.Action = "Home";
 			ViewBag.User = user;
 			IEnumerable<FilmDTO> film = await moviesGetterServices.GetAllFilms(cancellationToken);

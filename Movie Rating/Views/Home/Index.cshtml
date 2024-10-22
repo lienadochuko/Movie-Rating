@@ -63,27 +63,42 @@
 					</div>
 				</div>
 			</div>
-		}
-
-		<!-- Pagination controls -->
-		<div class="pagination">
-			@if (Model.CurrentPage > 1)
-			{
-				<a href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })">Previous</a>
-			}
-
-			@for (int i = 1; i <= Model.TotalPages; i++)
-			{
-				<a href="@Url.Action("Index", new { page = i })" class="@(i == Model.CurrentPage ? "active" : "")">
-					@i
-				</a>
-			}
-
-			@if (Model.CurrentPage < Model.TotalPages)
-			{
-				<a href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })">Next</a>
-			}
-		</div>    
-		@* <input type="file" id="MovieImg" onchange="convert();" /> *@
+		}		
 </div>
-<!-- Container closed -->
+    <br />
+
+    <div class="text-wrap">
+        <div class="example">
+            <ul class="pagination mb-0" style="justify-content:center;">
+                @if (Model.CurrentPage > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })"><i class="icon ion-ios-arrow-back"></i></a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="icon ion-ios-arrow-back"></i></a></li>
+
+                }
+                @if (Model.CurrentPage > 1)
+                {
+					<li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = 1 })">1</a></li>
+					<li class="page-item"><a class="page-link" href="javascript:void(0);">...</a></li>
+                }
+                @{
+                    int page2 = Model.CurrentPage + 1;
+                    int page3 = Model.CurrentPage + 2;
+
+                    <li class="page-item active"><a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage})">@Model.CurrentPage</a></li>
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })">@page2</a></li>
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage + 2 })">@page3</a></li>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })"><i class="icon ion-ios-arrow-forward"></i></a></li>
+                }
+            </ul>
+        </div>
+    </div>
+    @* <input type="file" id="MovieImg" onchange="convert();" /> *@
+</div>
