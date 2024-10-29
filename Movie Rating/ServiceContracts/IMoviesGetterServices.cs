@@ -18,7 +18,7 @@ namespace Movie_Rating.ServiceContracts
         /// Returns all Films
         /// </summary>
         /// <returns>Returns a list of object of FilmDTO type</returns>
-        Task<IEnumerable<FilmDTO>> GetAllFilms(CancellationToken cancellationToken);
+        Task<PaginatedFilmViewModel> GetAllFilms(CancellationToken cancellationToken, int pageNumber, int pageSize);
        
 
         ///// <summary>

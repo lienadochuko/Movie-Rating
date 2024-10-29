@@ -8,8 +8,80 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_accordion.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_alerts.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_badge.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_breadcrumbs.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_buttons.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_cards.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_carousel.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_custom.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_dropdown.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_forms.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_grid.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_input-group.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_modals.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_nav.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_paginations.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_popover.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_progress.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_tables.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_tabs.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_toast.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\_tooltip.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\fonts\_font.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_checkbox.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_countdown.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_custom-control.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_custom-styles.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_custom-styles1.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_ecommerce.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_Ie.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_image.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_list.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_listgroup.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_navbar.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_p-scroll.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_radio.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_ratting.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_tags.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_timeline.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_toggle.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\custom\_widgets.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_footer.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_header.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_horizontal-menu.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_iconbar.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_maincontent.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_profile.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_rtl.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_sidebar.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\layout\_sidemenu.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_calendar.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_chart.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_datatable.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_datepicker.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_datetimepicker.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_jquerysteps.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_jqvmap.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_notifications.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_parsely.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_rangesliders.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_select2.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\lib\_spectrum.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\plugins\perfect-scrollbar\p-scroll-rtl.js" />
+    <None Include="wwwroot\plugins\perfect-scrollbar\p-scroll.js" />
+    <None Include="wwwroot\plugins\perfect-scrollbar\perfect-scrollbar.common.js" />
+    <None Include="wwwroot\plugins\perfect-scrollbar\perfect-scrollbar.esm.js" />
+    <None Include="wwwroot\plugins\perfect-scrollbar\perfect-scrollbar.min-rtl.js" />
+    <None Include="wwwroot\plugins\perfect-scrollbar\perfect-scrollbar.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +108,85 @@
     <PackageReference Include="SerilogTimings" Version="3.1.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\css\style.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\style.css.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\style.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_calendar.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_chat.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_contact.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_error.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_invoice.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\temp\_mail.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_background.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_border.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_height.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_margin.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_opacity.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_padding.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_position.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_typography.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\util\_width.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\css\_variables.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

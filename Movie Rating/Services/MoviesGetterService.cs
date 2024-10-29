@@ -26,9 +26,9 @@ namespace Movie_Rating.Services
         ISignInService signInService, IConfiguration configuration,
         IHttpContextAccessor _httpContextAccessor) : IMoviesGetterServices
     {       
-        public async Task<IEnumerable<FilmDTO>> GetAllFilms(CancellationToken cancellationToken,int pageNumber,int pageSize)
+        public async Task<PaginatedFilmViewModel> GetAllFilms(CancellationToken cancellationToken,int pageNumber,int pageSize)
 		{
-			string apiUrl = $"http://localhost:5119/Movies/GETFILMS?pageNumber={pageNumber}&pageSize={pageSize}";
+			string apiUrl = $"https://localhost:7291/Movies/GETFILMS?pageNumber={pageNumber}&pageSize={pageSize}";
 			string bearerToken = GetTokenFromCookies();
 
             using (HttpClient client = new HttpClient())
@@ -44,9 +44,9 @@ namespace Movie_Rating.Services
                 string responseData = await response.Content.ReadAsStringAsync(cancellationToken);
 
                 // Deserialize JSON data into a list of FilmDTO objects
-                IEnumerable<FilmDTO> films = JsonConvert.DeserializeObject<IEnumerable<FilmDTO>>(responseData);
+                PaginatedFilmViewModel paginatedFilmViewModel = JsonConvert.DeserializeObject<PaginatedFilmViewModel>(responseData);
 
-                return films;
+                return paginatedFilmViewModel;
             }
         }
 

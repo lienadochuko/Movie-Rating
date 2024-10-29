@@ -5,6 +5,9 @@ using Movie_Rating.RepositoryContracts;
 using Movie_Rating.Repositories;
 using Movie_Rating.ServiceContracts;
 using Movie_Rating.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpContextAccessor();
+//builder.Services.AddScoped<SessionCheckBackgroundService>(); // Register the background service
 
 // CORS
 builder.Services.AddCors(options =>
@@ -25,12 +29,22 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+			.AddCookie(options =>
+			{
+				options.LoginPath = "/Auth/Login";
+				options.LogoutPath = "/Auth/Logout";
+			});
+
+builder.Services.AddScoped<SessionCheckFilter>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 builder.Services.AddScoped<IMoviesGetterServices, MoviesGetterService>();
 builder.Services.AddScoped<IMoviesUpdaterServices, MoviesUpdaterService>();
 builder.Services.AddScoped<IMoviesDeleterServices, MoviesDeleterService>();
-builder.Services.AddScoped<ISignInService, SignInService>();
+builder.Services.AddScoped<ISignInService, SignInService>(); 
+builder.Services.AddScoped<ISessionChecker, SessionChecker>();
+
 
 //Serilog
 builder.Host.UseSerilog((HostBuilderContext context,

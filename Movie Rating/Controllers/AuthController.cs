@@ -5,14 +5,15 @@ using System.Threading;
 
 namespace Movie_Rating.Controllers
 {
+    
     public class AuthController(ILogger<AuthController> _logger) : Controller
-    {  
-        public async Task<IActionResult> Login()
+    {
+		public async Task<IActionResult> Login()
         {
             return View();
         }
-        
-        public async Task<IActionResult> Register()
+
+		public async Task<IActionResult> Register()
         {
             return View();
         }

@@ -22,7 +22,7 @@
 
 
 
-async function postData(data) {
+async function postData(data, token) {
     try {
         const controller = new AbortController();
         const signal = controller.signal;
@@ -31,11 +31,12 @@ async function postData(data) {
             controller.abort();
         });
 
-        console.log(data);
+        //console.log(data);
         const response = await fetch("https://localhost:7006/Simos/Login", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': token
             },
             body: JSON.stringify(data),
             signal: signal
@@ -44,6 +45,7 @@ async function postData(data) {
         if (response.ok) {
             const result = await response.status;
             window.location.href = '/home/Index';
+            $("#global-loader").fadeOut("slow");
         } else if (response.status === 401) {
             return new Promise((resolve) => {
                 toastr.error('Session expired!', {
@@ -108,7 +110,11 @@ async function submitForm() {
                 Password: $('#Password').val(),
             };
 
-            await postData(formData);
+            // Get the anti-forgery token
+            const antiForgeryToken = $('input[name="__RequestVerificationToken"]').val();
+
+            // Add token to headers and send the request
+            await postData(formData, antiForgeryToken);
         }
         else {
             console.log('Form has errors');

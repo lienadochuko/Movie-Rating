@@ -9,9 +9,10 @@ namespace Movie_Rating.ApiController
     [ApiController]
     public class SimosController(ISignInService signInService) : ControllerBase
     {
+		//[ValidateAntiForgeryToken]
         [HttpPost]
         [Route("[Action]")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO, CancellationToken cancellationToken)
+		public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO, CancellationToken cancellationToken)
         {
             bool user = await signInService.Login(loginDTO, cancellationToken);
 
@@ -20,8 +21,17 @@ namespace Movie_Rating.ApiController
                 return Unauthorized(new { message = "Invalid login credentials." });
             }
 
-            // Return the user details or token
-            return Ok();
+			// Save the login time in a cookie
+			var loginTime = DateTime.UtcNow;
+			Response.Cookies.Append("LoginTime", loginTime.ToString(), new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				Expires = loginTime.AddMinutes(5) // Set cookie to expire after 30 mins
+			});
+
+			// Start the background session check service
+			return Ok();
         }
     }
 }

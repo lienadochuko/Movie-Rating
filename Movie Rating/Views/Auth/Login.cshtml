@@ -1,54 +1,168 @@
 ﻿@model LoginDTO;
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LayoutAuth.cshtml";
-    ViewBag.CurrentUrl = "~/Auth/Login";
+	ViewBag.Title = "Login";
+	// Layout = "~/Views/Shared/_LayoutAuth.cshtml";
+	Layout = null;
+	ViewBag.CurrentUrl = "~/Auth/Login";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<div class="text-grey">
-    <span>Eris</span>
-    <i class="fa-solid fa-caret-right"></i>
-    <span>Login</span>
-</div>
+	<meta charset="UTF-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+	<meta name="Author" content="Spruko Technologies Private Limited">
+	<meta name="Keywords" content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4" />
 
-<div class="form-container">
-    Haven't Registered? <a asp-action="Register" asp-controller="Auth" class="link-hover">Register</a>
-    <h2 class="text-large">Login</h2>
+	<!-- Title -->
+	<title> Eris Rates </title>
 
-    <form id="myLoginForm">
-        @*Email*@
-        <div class="form-field flex">
-            <div class="w-25">
-                <label asp-for="Email" class="form-label p-0 m-0">Email</label>
-            </div>
-            <div class="flex-1">
-                <input asp-for="Email" class="form-input" />
-                <span id="EmailError" class="text-red"></span>
-            </div>
-        </div>
+	<!-- Favicon -->
+	<link rel="icon" href="~/favicon.ico" type="image/x-icon" />
 
-        @*Password*@
-        <div class="form-field flex">
-            <div class="w-25">
-                <label asp-for="Password" class="form-label p-0 m-0">Password</label>
-            </div>
-            <div class="flex-1">
-                <input asp-for="Password" class="form-input" />
-                <span id="PasswordError" class="text-red"></span>
-            </div>
-        </div>
+	<!-- Icons css -->
+	<link href="~/css/icons.css" rel="stylesheet">
 
-        @*Register button*@
-        <div class="form-field flex">
-            <div class="w-25"></div>
-            <div class="flex-1">
-                <button class="button button-green-back" type="button" onclick="submitForm()">Login</button>
-            </div>
-        </div>
+	<!--  bootstrap css-->
+	<link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    </form>
-</div>
+	<!--  Right-sidemenu css -->
+	<link href="~/plugins/sidebar/sidebar.css" rel="stylesheet">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+	<!-- P-scroll bar css-->
+	<link href="~/plugins/perfect-scrollbar/p-scrollbar.css" rel="stylesheet" />
+
+	<!--- Style css --->
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/style-dark.css" rel="stylesheet">
+	<link href="~/css/style-transparent.css" rel="stylesheet">
+
+	<!---Skinmodes css-->
+	<link href="~/css/skin-modes.css" rel="stylesheet" />
+
+	<!--- Animations css-->
+	<link href="~/css/animate.css" rel="stylesheet">
+
+</head>
+<body class=" ltr error-page1 bg-primary dark-theme">
+
+	<!-- Loader -->
+	<div id="global-loader">
+		<img src="~/img/loader.svg" class="loader-img" alt="Loader">
+	</div>
+	<!-- /Loader -->
+
+
+	<div class="square-box">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	<div class="page">
+		<div class="page-single">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 col-xs-10 card-sigin-main mx-auto my-auto py-4 justify-content-center">
+						<div class="card-sigin">
+							<!-- Demo content-->
+							<div class="main-card-signin d-md-flex">
+								<div class="wd-100p" >
+									<div class="d-flex mb-4" style="align-items:center;">
+										<a href="index.html">
+											<img src="~/imageIcons/medium/images (3).png" class="sign-favicon ht-40" alt="logo">
+										</a> <h3 style="font-weight:700;" >ERIS</h3>
+									</div>
+									<div class="">
+										<div class="main-signup-header">
+											<h2>Welcome back!</h2>
+											<h6 class="font-weight-semibold mb-4">Please sign in to continue.</h6>
+											<div class="panel panel-primary">
+											@* 	<div class=" tab-menu-heading mb-2 border-bottom-0">
+													<div class="tabs-menu1">
+														<ul class="nav panel-tabs">
+															<li class="me-2"><a href="#tab5" class="active" data-bs-toggle="tab">Email</a></li>
+															@* <li><a href="#tab6" data-bs-toggle="tab" class="">Mobile no</a></li> 
+														</ul>
+													</div>
+												</div> *@
+												<div class="panel-body tabs-menu-body border-0 p-3">
+													<div class="tab-content">
+														<div class="tab-pane active" id="tab5">
+															<form id="myLoginForm" asp-antiforgery="true">
+																<div class="form-group">
+																	<label asp-for="Email">Email</label>
+																	<input asp-for="Email" class="form-control" placeholder="Enter your email">
+																</div>
+																<div class="form-group">
+																	<label asp-for="Password">Password</label>
+																	<input class="form-control" asp-for="Password" placeholder="Enter your password">
+																</div>
+																<button class="btn btn-primary btn-block" type="button" onclick="submitForm()">Sign In</button>
+															</form>
+													</div>
+												</div>
+											</div>
+
+											<div class="main-signin-footer text-center mt-3">
+												@* <p><a href="" class="mb-3">Forgot password?</a></p> *@
+												<p>Don't have an account? <a asp-action="Register" asp-controller="Auth">Create an Account</a></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- JQuery min js -->
+	<script src="~/plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap js -->
+	<script src="~/plugins/bootstrap/js/popper.min.js"></script>
+	<script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Ionicons js -->
+	<script src="~/plugins/ionicons/ionicons.js"></script>
+
+	<!-- Moment js -->
+	<script src="~/plugins/moment/moment.js"></script>
+
+	<!-- eva-icons js -->
+	<script src="~/js/eva-icons.min.js"></script>
+
+	<!-- generate-otp js -->
+	<script src="~/js/generate-otp.js"></script>
+
+	<!--Internal  Perfect-scrollbar js -->
+	<script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+	<!-- Theme Color js -->
+	<script src="~/js/themecolor.js"></script>
+
+	<script src="~/Submit.js"></script>
+
+	<!-- custom js -->
+	<script src="~/js/custom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

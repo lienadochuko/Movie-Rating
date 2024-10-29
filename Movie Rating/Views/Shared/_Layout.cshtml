@@ -3,9 +3,15 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Movie_Rating</title>
-	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+	
+	<link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />	
+	
+	<!-- Title -->
+	<title> Eris Rates </title>
+
+	<!-- Favicon -->
 	<link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+
 	<!-- Icons css -->
 	<link href="~/css/icons.css" rel="stylesheet" >
 
@@ -35,12 +41,30 @@
 	<!--- Animations css-->
 	<link href="~/css/animate.css" rel="stylesheet">
 </head>
-<body class="ltr main-body app sidebar-mini">
+<body class="ltr main-body app sidebar-mini dark-theme">
 	<!-- Loader -->
 	<div id="global-loader">
 		<img src="~/img/loader.svg" class="loader-img" alt="Loader">
 	</div>
 	<!-- /Loader -->
+	@* Modal *@
+	<div class="modal fade" id="Vertically">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content modal-content-demo">
+				<div class="modal-header">
+					<h6 class="modal-title">Vertically centered Modal</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn ripple btn-primary" type="button">Save changes</button>
+					<button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Page -->
 	<div class="page">
 		<div>
@@ -50,8 +74,8 @@
 					<div class="main-header-left ">
 						<div class="responsive-logo">
 							<a href="index.html" class="header-logo read_like">
-								<img src="~/imageIcons/medium/images (3)1.png" class="mobile-logo logo-1" alt="logo" style="margin: 0px;"> 
-								<img src="~/imageIcons/small/images (3)1.png" class="mobile-logo dark-logo-1" alt="logo"><b class="h5">Eris</b>
+								<img src="~/imageIcons/medium/images (3).png" class="mobile-logo logo-1" alt="logo" style="margin: 0px;"> 
+								<img src="~/imageIcons/medium/images (3)1.png" class="mobile-logo dark-logo-1" alt="logo"><b class="h5">Eris</b>
 							</a>
 						</div>
 						<div class="app-sidebar__toggle" data-bs-toggle="sidebar">
@@ -60,8 +84,8 @@
 						</div>
 						<div class="logo-horizontal">
 							<a href="index.html" class="header-logo">
-								<img src="~/imageIcons/small/images (3)1.png" class="mobile-logo logo-1" alt="logo">
-								<img src="~/imageIcons/small/images (3)1.png" class="mobile-logo dark-logo-1" alt="logo">
+								<img src="~/imageIcons/small/imagefavicon (3).png" class="mobile-logo logo-1" alt="logo">
+								<img src="~/imageIcons/small/imagefavicon (3).png" class="mobile-logo dark-logo-1" alt="logo">
 							</a>
 						</div>
 						@* <div class="main-header-center ms-4 d-sm-none d-md-none d-lg-block form-group">
@@ -82,24 +106,6 @@
 											<span class="light-layout"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" /></svg></span>
 										</a>
 									</li>
-									<li class="nav-item full-screen fullscreen-button">
-										<a class="new nav-link full-screen-link" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" width="24" height="24" viewBox="0 0 24 24"><path d="M5 5h5V3H3v7h2zm5 14H5v-5H3v7h7zm11-5h-2v5h-5v2h7zm-2-4h2V3h-7v2h5z" /></svg></a>
-									</li>
-									<li class="nav-link search-icon d-lg-none d-block">
-										<form class="navbar-form" role="search">
-											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Search">
-												<span class="input-group-btn">
-													<button type="reset" class="btn btn-default">
-														<i class="fas fa-times"></i>
-													</button>
-													<button type="submit" class="btn btn-default nav-link resp-btn">
-														<svg xmlns="http://www.w3.org/2000/svg" height="24px" class="header-icon-svgs" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" /></svg>
-													</button>
-												</span>
-											</div>
-										</form>
-									</li>
 									<li class="dropdown main-profile-menu nav nav-item nav-link ps-lg-2">
 										<a class="new nav-link profile-user d-flex" href="" data-bs-toggle="dropdown">
 											<img alt="" src="~/img/faces/1.jpeg" class=""></a>
@@ -108,12 +114,31 @@
 												<div class="d-flex wd-100p">
 													<div class="main-img-user"><img alt="" src="~/img/faces/1.jpeg" class=""></div>
 													<div class="ms-3 my-auto">
-														<h6 class="tx-15 font-weight-semibold mb-0">Eris Dans</h6>
-														<span class="dropdown-title-text subtext op-6  tx-12">Premium Member</span>
+														@if (@ViewBag.User != null){
+															<h6 class="tx-15 font-weight-semibold mb-0">@ViewBag.User?.Name</h6>
+															@if (@ViewBag.User.EmailConfirmed == false)
+															{
+																<span class="dropdown-title-text subtext op-6  tx-12">Basic Member</span>
+															} else
+															{
+																<span class="dropdown-title-text subtext op-6  tx-12">Premium Member</span>														
+															}
+														} else
+														{
+															<h6 class="tx-15 font-weight-semibold mb-0"></h6>
+															<span class="dropdown-title-text subtext op-6  tx-12"></span>
+														}
 													</div>
 												</div>
 											</div>
-											<a class="dropdown-item" href="profile.html"><i class="far fa-user-circle"></i>Profile</a>
+											@if (@ViewBag.Title == "Movies")
+											{
+												<a class="dropdown-item" asp-controller="Home" asp-action="Profile" ><i class="far fa-user-circle"></i>Profile</a>
+											}
+											@if (@ViewBag.Title == "Profile")
+											{
+												<a class="dropdown-item" asp-controller="Home" asp-action="Index"><i class="far fa-user-circle"></i>Home</a>
+											}
 											@* <a class="dropdown-item" href="chat.html"><i class="far fa-smile"></i> chat</a> *@
 											@* <a class="dropdown-item" href="mail-read.html"><i class="far fa-envelope "></i>Inbox</a> *@
 											@* <a class="dropdown-item" href="mail.html"><i class="far fa-comment-dots"></i>Messages</a> *@
@@ -140,11 +165,13 @@
 						</a>
 					</div>
 					<div class="main-sidemenu">
-						<div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" /></svg></div>
+						<div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
+							<path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" /></svg></div>
 						<ul class="side-menu">
 							<li class="side-item side-item-category">Main</li>
 							<li class="slide">
-								<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z" /></svg><span class="side-menu__label">Dashboards</span><i class="angle fe fe-chevron-right"></i></a>
+								<a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);">
+									<svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24"><path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm7 7v-5h4v5h-4zm2-15.586 6 6V15l.001 5H16v-5c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H6v-9.586l6-6z" /></svg><span class="side-menu__label">Dashboards</span><i class="angle fe fe-chevron-right"></i></a>
 								<ul class="slide-menu">
 									<li class="side-menu__label1"><a href="javascript:void(0);">Dashboards</a></li>
 									<li><a class="slide-item" href="index.html">Dashboard-1</a></li>
@@ -427,7 +454,8 @@
 
 		<!-- eva-icons js -->
 		<script src="~/js/eva-icons.min.js"></script>
-
+		<!-- modal js -->
+		<script src="~/js/modal.js"></script>
 		<!-- Theme Color js -->
 		<script src="~/js/themecolor.js"></script>
 

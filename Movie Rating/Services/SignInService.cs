@@ -1,88 +1,127 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Movie_Rating.Models.DTO;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace Movie_Rating.Services
 {
-    public interface ISignInService
-    { 
-      /// <summary>
-      /// Login User
-      /// </summary>
-      /// <returns>Returns the token and user Details</returns>
-        Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken);
-    }
+	public interface ISignInService
+	{
+		/// <summary>
+		/// Get Logged in user details
+		/// </summary>
+		/// <returns>object of user details</returns>
+		Task<UserDTO> getUser();
 
-    public class SignInService : ISignInService
-    {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+		/// <summary>
+		/// Login User
+		/// </summary>
+		/// <returns>Returns the token and user Details</returns>
+		Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken);
+	}
 
-        public SignInService(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
+	public class SignInService : ISignInService
+	{
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public async Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken)
-        {
-            string apiUrl = "http://localhost:5119/auth/Login";
+		public SignInService(IHttpContextAccessor httpContextAccessor)
+		{
+			_httpContextAccessor = httpContextAccessor;
+		}
 
-            var content = new StringContent(JsonConvert.SerializeObject(loginDTO), Encoding.UTF8, "application/json");
+		[ServiceFilter(typeof(SessionCheckFilter))]
+		public async Task<UserDTO> getUser()
+		{
+			
+			var userResponse = _httpContextAccessor.HttpContext.Request.Cookies["userEmail"];
+			var user = JsonConvert.DeserializeObject<dynamic>(userResponse);
 
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.PostAsync(apiUrl, content);
+			if (user == null)
+			{
+				return null;
+			}
 
-                // Throw an exception if the response status code doesn't indicate success
-                response.EnsureSuccessStatusCode();
+			UserDTO userDTO = new()
+			{
+				Name = user?.name,
+				Gender = user?.gender,
+				Id = user?.id,
+				UserName = user?.userName,
+				NormalizedUserName = user?.normalizedUserName,
+				Email = user?.email,
+				NormalizedEmail = user?.normalizedEmail,
+				EmailConfirmed = user?.emailConfirmed,
+				PhoneNumber = user?.phoneNumber,
+				PhoneNumberConfirmed = user?.phoneNumberConfirmed,
+				TwoFactorEnabled = user?.twoFactorEnabled,
+			};
 
-                // Read the response data
-                string responseData = await response.Content.ReadAsStringAsync(cancellationToken);
+			return userDTO;
+		}
 
-                // Deserialize the response JSON into a dynamic object
-                var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseData);
+		public async Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken)
+		{
+			string apiUrl = "https://localhost:7291/Auth/Login";
 
-                // Extract the token and user email from the response
-                // Check if the token or user email is empty
+			var content = new StringContent(JsonConvert.SerializeObject(loginDTO), Encoding.UTF8, "application/json");
 
-                string token = jsonResponse?.token;
-                string user = jsonResponse?.user?.email;
+			using (HttpClient client = new HttpClient())
+			{
+				var response = await client.PostAsync(apiUrl, content);
 
-                if (string.IsNullOrEmpty(token) 
-                    || string.IsNullOrEmpty(user))
-                {
-                    return false;
-                }
+				// Throw an exception if the response status code doesn't indicate success
+				response.EnsureSuccessStatusCode();
 
-                // Save the token and user information (implementation of SaveToken method)
-                SaveToken(token, user);
+				// Read the response data
+				string responseData = await response.Content.ReadAsStringAsync(cancellationToken);
 
-                return true;
-            }
-        }
+				// Deserialize the response JSON into a dynamic object
+				var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseData);
 
-        public void SaveToken(string token, string user)
-        {
-            var response = _httpContextAccessor.HttpContext.Response;
+				// Extract the token and user email from the response
+				// Check if the token or user email is empty
 
-            // Create cookie options
-            CookieOptions cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = DateTime.Now.AddHours(1),
-                Secure = true, // set to true if you're using HTTPS
-                SameSite = SameSiteMode.Strict
-            };
+				string token = jsonResponse?.token;
+				var user = jsonResponse?.user;
 
-            // Add the cookies
-            response.Cookies.Append("jwtToken", token, cookieOptions);
-            response.Cookies.Append("userEmail", user, cookieOptions);
-        }
+				if (string.IsNullOrEmpty(token)
+					|| user == null)
+				{
+					return false;
+				}
 
-        //public string GetTokenFromCookies()
-        //{
-        //    var Request = _httpContextAccessor.HttpContext.Request;
-        //    return Request.Cookies["jwtToken"];
-        //}
-    }
+				// Save the token and user information (implementation of SaveToken method)
+				SaveToken(token, user);
+
+				return true;
+			}
+		}
+
+		public void SaveToken(string token, object userResponse)
+		{
+			var response = _httpContextAccessor.HttpContext.Response;
+
+			// Create cookie options
+			CookieOptions cookieOptions = new CookieOptions
+			{
+				HttpOnly = true,
+				Expires = DateTime.Now.AddHours(1),
+				Secure = true, // set to true if you're using HTTPS
+				SameSite = SameSiteMode.Strict
+			};
+			var user = JsonConvert.SerializeObject(userResponse);
+
+			// Add the cookies
+			response.Cookies.Append("jwtToken", token, cookieOptions);
+			response.Cookies.Append("userEmail", user, cookieOptions);
+		}
+
+		//public string GetTokenFromCookies()
+		//{
+		//    var Request = _httpContextAccessor.HttpContext.Request;
+		//    return Request.Cookies["jwtToken"];
+		//}
+	}
 }
