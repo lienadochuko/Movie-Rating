@@ -27,6 +27,7 @@ namespace Movie_Rating.Models
 		public byte? OscarNominations { get; set; }
 		public byte? OscarWins { get; set; }
 		public string? Poster { get; set; }
-	}
+        public string? Rating { get; set; }
+    }
 
 }

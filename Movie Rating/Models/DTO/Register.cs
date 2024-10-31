@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Movie_Rating.Models.DTO
 {
-    public class RegisterDTO
+    public class Register
     {
         [Required(ErrorMessage = "Please input your Firstname")]
         public string FirstName { get; set; }
@@ -28,7 +28,7 @@ namespace Movie_Rating.Models.DTO
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please input your Gender")]
-        public string Gender { get; set; }
+        public GenderOptions Gender { get; set; } = GenderOptions.Male;
 
         [Required(ErrorMessage = "Please input your password")]
         [DataType(DataType.Password)]
@@ -41,6 +41,6 @@ namespace Movie_Rating.Models.DTO
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
 
-        public string UserType { get; set; }
+        public UserTypeOptions UserType { get; set; } = UserTypeOptions.User;
     }
 }

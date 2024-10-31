@@ -48,6 +48,8 @@ namespace Movie_Rating.Controllers
 
 			return View(paginatedFilmViewModel);
 		}
+
+
 		public async Task<IActionResult> Profile(CancellationToken cancellationToken = default)
 		{
 			ViewBag.Action = "Home";

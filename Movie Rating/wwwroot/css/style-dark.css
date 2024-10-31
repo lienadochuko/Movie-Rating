@@ -9,47 +9,52 @@
 /*dark colors*/
 /*---FONTS IMPORT --- */
 :root {
-    --primary-bg-color: #3780bc;
-    --primary-bg-hover: #5e95c8; /* A lighter shade of the primary color */
-    --primary-bg-border: #3780bc;
-    --primary02: rgba(55, 128, 188, 0.2); /* 20% transparency of the primary color */
-    --primary05: rgba(55, 128, 188, 0.5); /* 50% transparency of the primary color */
-    --primary-transparentcolor: rgba(55, 128, 188, 0.2); /* Same as --primary02 for consistency */
-    --transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05); /* Keeping this as is for slight white transparency */
-    --transparent-body: #3780bc;
-    --transparent-theme: rgba(0, 0, 0, 0.1); /* Black transparency for theme */
-    --blue: $primary;
-    --indigo: $primary;
-    --purple: $purple;
-    --pink: $pink;
-    --red: $danger;
-    --orange: $orange;
-    --yellow: $warning;
-    --green: $success;
-    --teal: $teal;
-    --cyan: $info;
-    --white: $white;
-    --gray: $gray-600;
-    --gray-dark: $gray-800;
-    --secondary: $gray-600;
-    --success: $success;
-    --info: $info;
-    --warning: $warning;
-    --danger: $danger;
-    --light: $gray-100;
-    --dark: $gray-800;
+    /* Dark Mode Primary Colors */
+    --primary-bg-color: #1f1f1f; /* Dark gray background */
+    --primary-bg-hover: #2c2c2c; /* Slightly lighter for hover */
+    --primary-bg-border: #444444; /* Border color that stands out on dark bg */
+    --primary02: rgba(31, 31, 31, 0.2); /* 20% transparency of primary-bg */
+    --primary05: rgba(31, 31, 31, 0.5); /* 50% transparency of primary-bg */
+    --primary-transparentcolor: rgba(31, 31, 31, 0.2);
+    --transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05); /* Slight white overlay for transparency */
+    --transparent-body: #1f1f1f; /* Background for body */
+    --transparent-theme: rgba(255, 255, 255, 0.1); /* Light overlay for theme elements */
+    /* Color variables adjusted for dark mode */
+    --blue: #0072C6; /* Darker blue */
+    --indigo: #3a3a52; /* Darker indigo */
+    --purple: #5e5c8a; /* Muted purple */
+    --pink: #b76e79; /* Darker pink for contrast */
+    --red: #b94a48; /* Darker red */
+    --orange: #d47b4a; /* Darker orange */
+    --yellow: #e0c16e; /* Muted yellow */
+    --green: #6b8e23; /* Dark olive green */
+    --teal: #468189; /* Darker teal */
+    --cyan: #357d94; /* Muted cyan */
+    --white: #eaeaea; /* Off-white for readability */
+    --gray: #333333; /* Base gray */
+    --gray-dark: #1a1a1a; /* Darker gray for contrast */
+    /* Dark Mode Theme Colors */
+    --secondary: #666666; /* Muted secondary color */
+    --success: #4caf50; /* Muted green for success */
+    --info: #5bc0de; /* Cyan info */
+    --warning: #ffb74d; /* Muted yellow for warnings */
+    --danger: #f44336; /* Darker red for danger */
+    --light: #444444; /* Light gray for elements needing lighter color */
+    --dark: #0d0d0d; /* Almost black for strong dark color */
+    /* Responsive Breakpoints */
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
+    /* Font Families */
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 body.dark-theme {
     color: #eaecf3;
-    background: #383d52;
+    background: #000000;
 }
 
 @media (max-width: 480px) {
@@ -534,7 +539,7 @@ body.dark-theme {
 }
 
 .dark-theme .app-sidebar {
-    background: #2a2e3f;
+    background: #000000;
     border-top: 0;
     box-shadow: 0 0 10px rgba(20, 28, 43, 0.8);
     border-right: 1px solid #404353;
@@ -542,7 +547,7 @@ body.dark-theme {
 
 .dark-theme .main-sidebar-header {
     background: #2a2e3f;
-    background: #2a2e3f;
+    background: #000000;
 }
 
 .dark-theme .side-menu__label,
@@ -2293,9 +2298,10 @@ body.dark-theme {
 .dark-theme .main-header-message .nav-link i,
 .dark-theme .main-header-notification .nav-link i,
 .dark-theme .nav-item.full-screen .nav-link i,
-.dark-theme .sales-flot .flot-chart .flot-x-axis>div span:last-child,
+.dark-theme .sales-flot .flot-chart .flot-x-axis > div span:last-child,
 .dark-theme .p-text .p-name {
-    color: #a9abbd;
+    /*color: #a9abbd;*/
+    color: #0072C6;
 }
 
 .dark-theme .hor-menu .horizontalMenu>.horizontalMenu-list>li>ul.sub-menu>li>a.active {
@@ -2751,7 +2757,7 @@ body.dark-theme {
     }
 
     .dark-theme .main-header {
-        background: #2a2e3f;
+        background: #000000;
         border-bottom: 1px solid #404353;
         box-shadow: none;
     }
@@ -3160,7 +3166,7 @@ body.dark-theme {
 }
 
 .dark-theme .header-icon-svgs {
-    fill: #a9abbd;
+    fill: #0072C6;
 }
 
 .dark-theme .app-sidebar .side-item.side-item-category {
@@ -3485,7 +3491,7 @@ body.dark-theme {
 }
 
 .dark-theme bg-dark-1 {
-    background: #2a2e3f;
+    background: #000000;
 }
 
 .dark-theme .main-nav .nav-link+.nav-link {

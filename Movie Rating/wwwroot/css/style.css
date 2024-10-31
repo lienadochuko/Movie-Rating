@@ -1,14 +1,58 @@
 :root {
+    /* Dark Mode Primary Colors */
+    --primary-bg-color: #1f1f1f; /* Dark gray background */
+    --primary-bg-hover: #2c2c2c; /* Slightly lighter for hover */
+    --primary-bg-border: #444444; /* Border color that stands out on dark bg */
+    --primary02: rgba(31, 31, 31, 0.2); /* 20% transparency of primary-bg */
+    --primary05: rgba(31, 31, 31, 0.5); /* 50% transparency of primary-bg */
+    --primary-transparentcolor: rgba(31, 31, 31, 0.2);
+    --transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05); /* Slight white overlay for transparency */
+    --transparent-body: #1f1f1f; /* Background for body */
+    --transparent-theme: rgba(255, 255, 255, 0.1); /* Light overlay for theme elements */
+    /* Color variables adjusted for dark mode */
+    --blue: #3780bc;
+    --indigo: #3a3a52; /* Darker indigo */
+    --purple: #5e5c8a; /* Muted purple */
+    --pink: #b76e79; /* Darker pink for contrast */
+    --red: #b94a48; /* Darker red */
+    --orange: #d47b4a; /* Darker orange */
+    --yellow: #e0c16e; /* Muted yellow */
+    --green: #6b8e23; /* Dark olive green */
+    --teal: #468189; /* Darker teal */
+    --cyan: #357d94; /* Muted cyan */
+    --white: #eaeaea; /* Off-white for readability */
+    --gray: #333333; /* Base gray */
+    --gray-dark: #1a1a1a; /* Darker gray for contrast */
+    /* Dark Mode Theme Colors */
+    --secondary: #666666; /* Muted secondary color */
+    --success: #4caf50; /* Muted green for success */
+    --info: #5bc0de; /* Cyan info */
+    --warning: #ffb74d; /* Muted yellow for warnings */
+    --danger: #f44336; /* Darker red for danger */
+    --light: #444444; /* Light gray for elements needing lighter color */
+    --dark: #0d0d0d; /* Almost black for strong dark color */
+    /* Responsive Breakpoints */
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    /* Font Families */
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/*:root {
     --primary-bg-color: #3780bc;
-    --primary-bg-hover: #5e95c8; /* A lighter shade of the primary color */
-    --primary-bg-border: #3780bc;
-    --primary02: rgba(55, 128, 188, 0.2); /* 20% transparency of the primary color */
-    --primary05: rgba(55, 128, 188, 0.5); /* 50% transparency of the primary color */
-    --primary-transparentcolor: rgba(55, 128, 188, 0.2); /* Same as --primary02 for consistency */
-    --transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05); /* Keeping this as is for slight white transparency */
-    --transparent-body: #3780bc;
-    --transparent-theme: rgba(0, 0, 0, 0.1); /* Black transparency for theme */
-    --blue: $primary;
+    --primary-bg-hover: #5e95c8;*/ /* A lighter shade of the primary color */
+    /*--primary-bg-border: #3780bc;
+    --primary02: rgba(55, 128, 188, 0.2);*/ /* 20% transparency of the primary color */
+    /*--primary05: rgba(55, 128, 188, 0.5);*/ /* 50% transparency of the primary color */
+    /*--primary-transparentcolor: rgba(55, 128, 188, 0.2);*/ /* Same as --primary02 for consistency */
+    /*--transparentprimary-transparentcolor: rgba(255, 255, 255, 0.05);*/ /* Keeping this as is for slight white transparency */
+    /*--transparent-body: #3780bc;
+    --transparent-theme: rgba(0, 0, 0, 0.1);*/ /* Black transparency for theme */
+    /*--blue: $primary;
     --indigo: $primary;
     --purple: $purple;
     --pink: $pink;
@@ -35,7 +79,7 @@
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
+}*/
 
 /* ######## FONT ######## */
 /* ############### FONTS IMPORT ############### */
@@ -845,7 +889,8 @@ btn-outline-primary:hover .bg-primary {
     text-decoration: none; }
 
 .breadcrumb-item.active {
-  color: var(--primary-bg-color); }
+    color: var(--blue);
+}
 
 .breadcrumb-style1, .breadcrumb-style2, .breadcrumb-style3 {
   border-radius: 7px; }
@@ -19282,16 +19327,18 @@ ul.inbox-pagination {
   margin-top: 10px; }
 
 .remove-icons .remove-heart i {
-  border: 1px solid var(--primary-bg-color);
-  border-radius: 35px;
-  padding: 6px;
-  color: var(--primary-bg-color); }
+    border: 1px solid #f74f75;
+    border-radius: 35px;
+    padding: 6px;
+    color: #f74f75;
+}
 
 .remove-icons .remove-thumb i {
-  border: 1px solid #f74f75;
-  border-radius: 35px;
-  padding: 6px;
-  color: #f74f75; }
+    border: 1px solid var(--blue);
+    border-radius: 35px;
+    padding: 6px;
+    color: var(--blue);
+}
 
 .nav.panel-tabs .side-menu__icon {
   margin-right: 5px;

@@ -1,8 +1,10 @@
 ﻿using Azure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Movie_Rating.Helpers.Enums;
 using Movie_Rating.Models.DTO;
 using Newtonsoft.Json;
+using System;
 using System.Text;
 
 namespace Movie_Rating.Services
@@ -20,6 +22,12 @@ namespace Movie_Rating.Services
 		/// </summary>
 		/// <returns>Returns the token and user Details</returns>
 		Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Register User
+		/// </summary>
+		/// <returns>Returns the Registered user Details</returns>
+		Task<bool> Register(RegisterDTO registerDTO, CancellationToken cancellationToken);
 	}
 
 	public class SignInService : ISignInService
@@ -59,6 +67,52 @@ namespace Movie_Rating.Services
 			};
 
 			return userDTO;
+		}
+
+		public async Task<bool> Register(RegisterDTO registerDTO, CancellationToken cancellationToken)
+		{
+			string apiUrl = "https://localhost:7291/Auth/Register";
+			Register register = new Register()
+			{
+				FirstName = registerDTO.FirstName,
+				LastName = registerDTO.LastName,
+				Email = registerDTO.Email,
+				Password = registerDTO.Password,
+				ConfirmPassword = registerDTO.ConfirmPassword,
+				PhoneNumber = registerDTO.PhoneNumber,
+				Gender = Enum.TryParse<GenderOptions>(registerDTO.Gender, out var gender) ? gender : default,
+				UserType = Enum.TryParse<UserTypeOptions>(registerDTO.UserType, out var userType) ? userType : default
+			};
+
+
+			var content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+
+			using (HttpClient client = new HttpClient())
+			{
+				var response = await client.PostAsync(apiUrl, content);
+
+				// Throw an exception if the response status code doesn't indicate success
+				response.EnsureSuccessStatusCode();
+
+				// Read the response data
+				string responseData = await response.Content.ReadAsStringAsync(cancellationToken);
+
+				// Deserialize the response JSON into a dynamic object
+				var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseData);
+
+				// Extract the token and user email from the response
+				// Check if the token or user email is empty
+
+				string Successresponse = jsonResponse;
+
+				if (string.IsNullOrEmpty(Successresponse)
+					|| Successresponse == null)
+				{
+					return false;
+				}
+
+				return true;
+			}
 		}
 
 		public async Task<bool> Login(LoginDTO loginDTO, CancellationToken cancellationToken)
