@@ -98,15 +98,15 @@ namespace Movie_Rating.Services
 				string responseData = await response.Content.ReadAsStringAsync(cancellationToken);
 
 				// Deserialize the response JSON into a dynamic object
-				var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseData);
+				//var jsonResponse = JsonConvert.DeserializeObject<dynamic>(responseData);
 
 				// Extract the token and user email from the response
 				// Check if the token or user email is empty
 
-				string Successresponse = jsonResponse;
+				//string Successresponse = responseData;
 
-				if (string.IsNullOrEmpty(Successresponse)
-					|| Successresponse == null)
+				if (string.IsNullOrEmpty(responseData)
+					|| responseData == null)
 				{
 					return false;
 				}
