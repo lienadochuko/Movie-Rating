@@ -15,9 +15,6 @@
 	<!-- Icons css -->
 	<link href="~/css/icons.css" rel="stylesheet" >
 
-	<!--- Style css --->
-	<link href="~/css/ExtraStyle.css" rel="stylesheet">
-
 	<!--  bootstrap css-->
 	<link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -39,7 +36,10 @@
 	<link href="~/css/skin-modes.css" rel="stylesheet" />
 
 	<!--- Animations css-->
-	<link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+
+    <!--- Style css --->
+    <link href="~/css/ExtraStyle.css" rel="stylesheet">
 </head>
 <body class="ltr main-body app sidebar-mini dark-theme sidenav-toggled">
 	<!-- Loader -->
@@ -111,12 +111,13 @@
 									</li>
 									<li class="dropdown main-profile-menu nav nav-item nav-link ps-lg-2">
 										<a class="new nav-link profile-user d-flex" href="" data-bs-toggle="dropdown">
-											<img alt="" src="~/img/faces/1.jpeg" class=""></a>
+											<img alt="" src="data:image/png;base64,@ViewBag.UserImage" class="">
+										</a>
 										<div class="dropdown-menu">
 											<div class="menu-header-content p-3 border-bottom">
 												<div class="d-flex wd-100p">
                                                     <div class="main-img-user"  >
-                                                        <img alt="" src="~/img/faces/1.jpeg" class=""  >
+														<img alt="" src="data:image/png;base64,@ViewBag.UserImage" class="">
 													</div>
 													<div class="ms-3 my-auto">
 														@if (@ViewBag.User != null){
@@ -136,11 +137,11 @@
 													</div>
 												</div>
 											</div>
-											@if (@ViewBag.Title == "Movies")
+											@if (@ViewBag.Page == "Movies")
 											{
 												<a class="dropdown-item" asp-controller="Home" asp-action="Profile" ><i class="far fa-user-circle"></i>Profile</a>
 											}
-											@if (@ViewBag.Title == "Profile")
+											@if (@ViewBag.Page == "Profile")
 											{
 												<a class="dropdown-item" asp-controller="Home" asp-action="Index"><i class="far fa-user-circle"></i>Home</a>
 											}
@@ -431,43 +432,43 @@
         <!-- Back-to-top -->
 		<a href="#top" id="back-to-top"><i class="las la-arrow-up"></i></a>
 		<!-- JQuery min js -->
-		<script src="~/plugins/jquery/jquery.min.js"></script>
+		<script src="~/plugins/jquery/jquery.min.js" asp-append-version="true"></script>
 
 		<!-- Bootstrap js -->
-		<script src="~/plugins/bootstrap/js/popper.min.js"></script>
-		<script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="~/plugins/bootstrap/js/popper.min.js" asp-append-version="true"></script>
+		<script src="~/plugins/bootstrap/js/bootstrap.min.js" asp-append-version="true"></script>
 
 		<!-- Ionicons js -->
-		<script src="~/plugins/ionicons/ionicons.js"></script>
+		<script src="~/plugins/ionicons/ionicons.js" asp-append-version="true"></script>
 
 		<!-- Moment js -->
-		<script src="~/plugins/moment/moment.js"></script>
+		<script src="~/plugins/moment/moment.js" asp-append-version="true"></script>
 
 		<!-- P-scroll js -->
-		<script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-		<script src="~/plugins/perfect-scrollbar/p-scroll.js"></script>
+		@* <script src="~/plugins/perfect-scrollbar/perfect-scrollbar.min.js" asp-append-version="true"></script> *@
+		<script src="~/plugins/perfect-scrollbar/p-scroll.js" asp-append-version="true"></script>
 
 		<!-- Sidebar js -->
-		<script src="~/plugins/side-menu/sidemenu.js"></script>
+		<script src="~/plugins/side-menu/sidemenu.js" asp-append-version="true"></script>
 
 		<!-- Sticky js -->
-		<script src="~/js/sticky.js"></script>
+		<script src="~/js/sticky.js" asp-append-version="true"></script>
 
 		<!-- Right-sidebar js -->
-		<script src="~/plugins/sidebar/sidebar.js"></script>
-		<script src="~/plugins/sidebar/sidebar-custom.js"></script>
+		<script src="~/plugins/sidebar/sidebar.js" asp-append-version="true"></script>
+		<script src="~/plugins/sidebar/sidebar-custom.js" asp-append-version="true"></script>
 
 		<!-- eva-icons js -->
-		<script src="~/js/eva-icons.min.js"></script>
+		<script src="~/js/eva-icons.min.js" asp-append-version="true"></script>
 		<!-- modal js -->
-		<script src="~/js/modal.js"></script>
+		<script src="~/js/modal.js" asp-append-version="true"></script>
 		<!-- Theme Color js -->
-		<script src="~/js/themecolor.js"></script>
+		<script src="~/js/themecolor.js" asp-append-version="true"></script>
 
 		<!-- custom js -->
-		<script src="~/js/custom.js"></script>
+		<script src="~/js/custom.js" asp-append-version="true"></script>
 
-		<script src="~/ExtraScript.js"></script>
+		<script src="~/ExtraScript.js" asp-append-version="true"></script>
 
 		@await RenderSectionAsync("Scripts", required: false)
 

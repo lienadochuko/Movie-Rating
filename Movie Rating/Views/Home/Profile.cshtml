@@ -1,6 +1,6 @@
 ﻿@model UserDTO
 @{
-	ViewData["Title"] = "Profile";
+	ViewData["Page"] = "Profile";
 }
 <!-- container -->
 <div class="main-container container-fluid">
@@ -8,12 +8,12 @@
 	<!-- breadcrumb -->
 	<div class="breadcrumb-header justify-content-between">
 		<div class="left-content">
-			<span class="main-content-title mg-b-0 mg-b-lg-1">PROFILE</span>
+			<span class="main-content-title mg-b-0 mg-b-lg-1">@ViewBag.Page</span>
 		</div>
 		<div class="justify-content-center mt-2">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item tx-15"><a href="javascript:void(0);">@ViewBag.Action</a></li>
-				<li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+				<li class="breadcrumb-item active" aria-current="page">@ViewBag.Page</li>
 			</ol>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 					<div class="pos-relative">
 						<span class="profile-image">
 							<img class="br-5" alt=""
-									src="../assets/img/faces/profile.jpg">
+								 src="data:image/png;base64,@ViewBag.UserImage">
 						</span>
 						<div class="bg-success text-white wd-1 ht-1 rounded-pill profile-online"></div>
 					</div>

@@ -14,11 +14,61 @@ using Movie_Rating.ServiceContracts;
 using Movie_Rating.RepositoryContracts;
 using Movie_Rating.Models.DTO;
 using Movie_Rating.Helpers;
+using Movie_Rating.Models;
+using Newtonsoft.Json;
 
 namespace Movie_Rating.Services
 {
-    public class MoviesUpdaterService(IMoviesRepository moviesRepository) : IMoviesUpdaterServices
-    {
+    public class MoviesUpdaterService(IMoviesRepository moviesRepository,
+		ISignInService signInService, IConfiguration configuration,
+		IHttpContextAccessor _httpContextAccessor) : IMoviesUpdaterServices
+	{
+        public async Task<bool> UpdateFilmPosters(CancellationToken cancellationToken)
+        {
+            string apiUrl = "https://localhost:7291/Movies/UpdateFilmPosters";
+            string bearerToken = GetTokenFromCookies();
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Add the Authorization header with the bearer token
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+
+                try
+                {
+                    // Make the PUT request
+                    HttpResponseMessage response = await client.PutAsync(apiUrl, null, cancellationToken);
+
+                    // Check for successful response
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        // Optionally log the response content if it fails
+                        string errorContent = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Error: {response.StatusCode} - {errorContent}");
+                        return false;
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    Console.WriteLine($"Network error: {ex.Message}");
+                }
+                catch (TaskCanceledException ex)
+                {
+                    Console.WriteLine($"Request canceled: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Unexpected error: {ex.Message}");
+                }
+
+                return false;
+            }
+        }
+
+
         /// <summary>
         /// Updates the actor's details
         /// </summary>
@@ -54,6 +104,13 @@ namespace Movie_Rating.Services
 
 
             return true;
-        }
-    }
+			}
+
+
+			public string GetTokenFromCookies()
+			{
+				var Request = _httpContextAccessor.HttpContext.Request;
+				return Request.Cookies["jwtToken"];
+			}
+		}
 }

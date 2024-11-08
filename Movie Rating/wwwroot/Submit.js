@@ -1,4 +1,76 @@
-﻿async function postRegisterData(data, token) {
+﻿async function resetjs() {
+    try {
+        const searchInput = document.getElementById('searchInput').value.trim();
+        const errorSpan = document.getElementById('searchError');
+        let formIsValid = true;
+
+            errorSpan.textContent = "";
+            errorSpan.textContent = "";
+
+        if (formIsValid) {
+            $("#global-loader").fadeIn("slow");
+            console.log("Search input is valid");
+
+            try {
+                // Redirect to the search results page
+                window.location.href = `https://localhost:7006/home/Index`;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        } else {
+            console.log("Form has errors");
+            //toastr.warning("Please ensure to properly fill all fields as indicated!");
+        }
+    } catch (error) {
+        console.log(error);
+        //toastr.error("An error occurred. Please try again.");
+    } finally {
+        $("#global-loader").fadeOut("slow");
+    }
+}
+
+async function searchjs() {
+    try {
+        const searchInput = document.getElementById('searchInput').value.trim();
+        const errorSpan = document.getElementById('searchError');
+        let formIsValid = true;
+
+        if (!searchInput) {
+            errorSpan.textContent = "Search field cannot be empty.";
+            formIsValid = false;
+        } else if (!/^[a-zA-Z0-9\s]+$/.test(searchInput)) {
+            errorSpan.textContent = "Search input contains invalid characters.";
+            formIsValid = false;
+        } else {
+            errorSpan.textContent = "";
+        }
+
+        if (formIsValid) {
+            $("#global-loader").fadeIn("slow");
+            console.log("Search input is valid");
+
+            try {
+                // Redirect to the search results page
+                window.location.href = `https://localhost:7006/home/Index?title=${encodeURIComponent(searchInput)}`;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        } else {
+            console.log("Form has errors");
+            //toastr.warning("Please ensure to properly fill all fields as indicated!");
+        }
+    } catch (error) {
+        console.log(error);
+        //toastr.error("An error occurred. Please try again.");
+    } finally {
+        $("#global-loader").fadeOut("slow");
+    }
+}
+
+
+async function postRegisterData(data, token) {
     try {
         const controller = new AbortController();
         const signal = controller.signal;
@@ -136,30 +208,26 @@ async function postData(data, token) {
         });
 
         if (response.ok) {
-            const result = await response.status;
+            console.log(response.status);
             window.location.href = '/home/Index';
             $("#global-loader").fadeOut("slow");
         } else if (response.status === 401) {
-            return new Promise((resolve) => {
-                toastr.error('Session expired!', {
-                    onClose: function () {
-                        location.reload();
-                        resolve();
-                    }
-                });
-            });
+            console.log("")
+            window.location.href = '/home/Index';
         } else if (response.status === 400) {
             let message = await response.text();
             let IsRecNotFound = message == '"No records found!"';
-            throw new Error(IsRecNotFound ? 'No records found!' : 'The details provided were invalid!');
+            console.log(IsRecNotFound ? 'No records found!' : 'The details provided were invalid!');
+            window.location.href = '/home/Index';
         } else {
-            throw new Error('Internal Server Error');
+            console.log('Internal Server Error');
+            window.location.href = '/home/Index';
         }
     } catch (error) {
-        console.error(error);
-        throw error; // Re-throw the error for the caller to handle
+        console.log(error);
     }
 }
+
 
 async function submitForm() {
     try {
@@ -220,5 +288,21 @@ async function submitForm() {
     finally {
         $("#global-loader").fadeOut("slow");
     }
+
+}
+
+function validateEmail(input) {
+    //const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    input.value = input.value.replace(/[^a-zA-Z0-9@._\-]/g, '');
+
+}
+function validate(input) {
+    input.value = input.value.replace(/[^a-zA-Z0-9_\-]/g, '');
+    const errorSpan = document.getElementById('searchError');
+    errorSpan.textContent = "";
+
+}
+function validateNo(input) {
+    input.value = input.value.replace(/[^a-zA-Z0-9_\-]/g, '');
 
 }

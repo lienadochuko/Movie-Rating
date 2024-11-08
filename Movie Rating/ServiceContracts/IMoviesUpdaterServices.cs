@@ -11,6 +11,8 @@ namespace Movie_Rating.ServiceContracts
     /// </summary>
     public interface IMoviesUpdaterServices
     {
-        Task<bool> UpdateActors(ActorsUpdateRequest actorsUpdateRequest, CancellationToken cancellationToken);
+        Task<bool> UpdateFilmPosters(CancellationToken cancellationToken);
+
+		Task<bool> UpdateActors(ActorsUpdateRequest actorsUpdateRequest, CancellationToken cancellationToken);
     }
 }

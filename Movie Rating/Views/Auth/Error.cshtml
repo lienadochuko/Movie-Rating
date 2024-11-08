@@ -1,9 +1,8 @@
-﻿@model LoginDTO;
-@{
-	ViewBag.Page = "Login";
+﻿@{
+	ViewBag.Page = "Error";
 	// Layout = "~/Views/Shared/_LayoutAuth.cshtml";
 	Layout = null;
-	ViewBag.CurrentUrl = "~/Auth/Login";
+	ViewBag.CurrentUrl = "~/Auth/Error";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +53,6 @@
 	</div>
 	<!-- /Loader -->
 
-
 	<div class="square-box">
 		<div></div>
 		<div></div>
@@ -73,66 +71,15 @@
 		<div></div>
 	</div>
 	<div class="page">
-		<div class="page-single">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-5 col-lg-6 col-md-8 col-sm-8 col-xs-10 card-sigin-main mx-auto my-auto py-4 justify-content-center">
-						<div class="card-sigin">
-							<!-- Demo content-->
-							<div class="main-card-signin d-md-flex">
-								<div class="wd-100p" >
-									<div class="d-flex mb-4" style="align-items:center;">
-										<a href="#">
-											<img src="~/imageIcons/medium/images (3).png" class="sign-favicon ht-40" alt="logo">
-										</a> <h3 style="font-weight:700;" >ERIS</h3>
-									</div>
-									<div class="">
-										<div class="main-signup-header">
-											<h2>Welcome back!</h2>
-											<h6 class="font-weight-semibold mb-4">Please sign in to continue.</h6>
-											<div class="panel panel-primary">
-											@* 	<div class=" tab-menu-heading mb-2 border-bottom-0">
-													<div class="tabs-menu1">
-														<ul class="nav panel-tabs">
-															<li class="me-2"><a href="#tab5" class="active" data-bs-toggle="tab">Email</a></li>
-															@* <li><a href="#tab6" data-bs-toggle="tab" class="">Mobile no</a></li> 
-														</ul>
-													</div>
-												</div> *@
-												<div class="panel-body tabs-menu-body border-0 p-3">
-													<div class="tab-content">
-														<div class="tab-pane active" id="tab5">
-															<form id="myLoginForm" asp-antiforgery="true">
-																<div class="form-group">
-																	<label asp-for="Email">Email</label>
-																	<input asp-for="Email" class="form-control" placeholder="Enter your email" oninput="validateEmail(this)">
-																	<span asp-validation-for="Email" class="text-red"></span>
-																</div>
-																<div class="form-group">
-																	<label asp-for="Password">Password</label>
-																	<input class="form-control" asp-for="Password" placeholder="Enter your password">
-																	<span asp-validation-for="Password" class="text-red"></span>
-																</div>
-																<button class="btn btn-primary btn-block" type="button" onclick="submitForm()">Sign In</button>
-															</form>
-													</div>
-												</div>
-											</div>
-
-											<div class="main-signin-footer text-center mt-3">
-												@* <p><a href="" class="mb-3">Forgot password?</a></p> *@
-												<p>Don't have an account? <a asp-action="Register" asp-controller="Auth">Create an Account</a></p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<!-- Main-error-wrapper -->
+		<div class="main-error-wrapper page page-h">
+			<h1 class="text-white">404<span class="tx-20">error</span></h1>
+			<h2 class="text-white">Oopps. The page you were looking for doesn't exist.</h2>
+			<h6 class="tx-white-6">You may have mistyped the address or the page may have moved.</h6><a class="btn btn-light" href="index">Back to Home</a>
 		</div>
+		<!-- /Main-error-wrapper -->
 	</div>
+
 	<!-- JQuery min js -->
 	<script src="~/plugins/jquery/jquery.min.js" asp-append-version="true"></script>
 
@@ -165,9 +112,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-append-version="true"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" asp-append-version="true"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-
-
-
-
 </body>
 </html>

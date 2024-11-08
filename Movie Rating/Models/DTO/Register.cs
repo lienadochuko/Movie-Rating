@@ -42,5 +42,7 @@ namespace Movie_Rating.Models.DTO
         public string ConfirmPassword { get; set; }
 
         public UserTypeOptions UserType { get; set; } = UserTypeOptions.User;
+
+        public string Image { get; set; }
     }
 }

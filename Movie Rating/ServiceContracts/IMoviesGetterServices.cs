@@ -19,7 +19,18 @@ namespace Movie_Rating.ServiceContracts
         /// </summary>
         /// <returns>Returns a list of object of FilmDTO type</returns>
         Task<PaginatedFilmViewModel> GetAllFilms(CancellationToken cancellationToken, int pageNumber, int pageSize);
-       
+
+        /// <summary>
+        /// Returns a list of movies based on searched title
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <param name="title"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <returns>Returns a list of movies based on searched title</returns>
+        Task<PaginatedFilmViewModel> GetFilmsByTitle(CancellationToken cancellationToken, string title, int pageNumber, int pageSize);
+
+
 
         ///// <summary>
         ///// Returns the actor object based on the given actor id

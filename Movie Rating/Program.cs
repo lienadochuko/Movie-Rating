@@ -35,6 +35,24 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 				options.LoginPath = "/Auth/Login";
 				options.LogoutPath = "/Auth/Logout";
 			});
+builder.Services.AddDistributedMemoryCache(); // In-memory cache for session
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromHours(1); // Adjust as necessary
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true; // Ensure session cookies are essential for GDPR compliance
+});
+
+
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//	options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Only send cookies over HTTPS
+//});
+
+//builder.Services.AddAntiforgery(options =>
+//{
+//	options.Cookie.SameSite = SameSiteMode.None;  // Allow cookie across schemes in dev only
+//});
 
 builder.Services.AddScoped<SessionCheckFilter>();
 builder.Services.AddScoped<IDataRepository, DataRepository>();
@@ -64,23 +82,26 @@ builder.Services.AddHttpLogging(options =>
 
 Rotativa.AspNetCore.RotativaConfiguration.Setup("wwwroot", wkhtmltopdfRelativePath: "Rotativa");
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler("/Auth/Error");
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseHsts();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
+app.UseStatusCodePagesWithReExecute("/Auth/Error");
 
 app.MapControllerRoute(
     name: "default",

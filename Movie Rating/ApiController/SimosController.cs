@@ -9,8 +9,8 @@ namespace Movie_Rating.ApiController
     [ApiController]
     public class SimosController(ISignInService signInService) : ControllerBase
     {
-        [HttpPost]
         [Route("[Action]")]
+        [HttpPost]
 		public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO, CancellationToken cancellationToken)
         {
             bool user = await signInService.Login(loginDTO, cancellationToken);
@@ -29,16 +29,17 @@ namespace Movie_Rating.ApiController
 				Expires = loginTime.AddMinutes(5) // Set cookie to expire after 30 mins
 			});
 
-			// Start the background session check service
-			return Ok();
-        }
+			return Ok("Logged in sucess");
+         }
 		
 
         [HttpPost]
         [Route("[Action]")]
 		public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO, CancellationToken cancellationToken)
         {
-            bool user = await signInService.Register(registerDTO, cancellationToken);
+            var image = await FetchRandomCartoonImageBase64Async();
+
+            bool user = await signInService.Register(registerDTO, image, cancellationToken);
 
             if (user == false)
             {
@@ -47,6 +48,48 @@ namespace Movie_Rating.ApiController
 
 			// Start the background session check service
 			return Ok();
+        }
+
+        private string GenerateRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private async Task<string> FetchRandomCartoonImageBase64Async()
+        {
+            string uniqueString = GenerateRandomString(8); // Generates an 8-character random string
+            string apiUrl = $"https://robohash.org/{uniqueString}.png?set=set4";
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                    // Check if the response was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+                        return Convert.ToBase64String(imageBytes);
+                    }
+                    else
+                    {
+                        // Log the unsuccessful status code
+                        Console.WriteLine($"API call unsuccessful: {response.StatusCode}. Using fallback image.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception details
+                    Console.WriteLine($"Error fetching image from API: {ex.Message}. Using fallback image.");
+                }
+
+                // If API call fails or any exception occurs, return a generated Base64 image
+                return null;
+            }
         }
     }
 }

@@ -55,11 +55,12 @@
 
 .filmCard {
     width: 100%;
-    height:150px;
+    height:fit-content;
     display: flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    padding:5px;
     border-bottom:1px solid #404353;
     border-left:1px solid #404353;
     border-right:1px solid #404353;
@@ -80,10 +81,44 @@
     color:red;
 }
 
+.SearchWrapper{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:flex-end;
+    padding-right:5%;
+}
+
+.search {
+    width: 80%;
+    margin: 5px 0px;
+    display: flex;
+    justify-self: right;
+}
+.searchbutton {
+    height: 40px;;
+    border-top: 1px solid #484863;
+    border-bottom: 1px solid #484863;
+    border-left: 1px solid #484863;
+    border-right: 1px solid #484863;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.resetbutton {
+    height: 40px;
+    background-color: #2a2e3f;
+    border-top: 1px solid #484863;
+    border-bottom: 1px solid #484863;
+    border-radius: 0px;
+}
 
 @media screen and (min-width: 512px) {
     .filmWrapper {
         width: 35%;
+    }
+
+    .search {
+        width:50%;
     }
 }
 
@@ -92,13 +127,25 @@
     .filmWrapper {
         width: 30%;
     }
+    .search {
+        width:20%;
+    }
 
+}
+
+@media screen and (max-width: 933px) {
+    .search {
+        width: 40%;
+    }
 }
 
 @media screen and (min-width: 1000px) {
 
     .filmWrapper {
         width: 18%;
+    }
+    .search {
+        width: 30%;
     }
 
 }
