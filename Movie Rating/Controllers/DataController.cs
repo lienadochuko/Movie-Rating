@@ -18,6 +18,7 @@ namespace Movie_Rating.Controllers
 	[ApiController]
 	public class DataController(ILogger<DataController> _logger,
 		IMoviesUpdaterServices moviesUpdaterServices,
+		IMoviesGetterServices moviesGetterServices,
 		ISignInService signInService,
 		ISessionChecker sessionChecker) : ControllerBase
 	{
@@ -35,7 +36,7 @@ namespace Movie_Rating.Controllers
 			{
 				return BadRequest();
 			}
-		}
+		}		
 
 	}
 }

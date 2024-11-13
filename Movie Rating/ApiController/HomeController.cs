@@ -92,7 +92,21 @@ namespace Movie_Rating.ApiController
 			return View(paginatedFilmViewModel);
 		}
 
-		[HttpGet]
+
+        [Route("Home/[action]/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> FilmView ( int id, CancellationToken cancellationToken)
+        {
+            ViewBag.Action = "Home";
+
+            User();
+
+            FilmDTO2 film = await moviesGetterServices.GETFILMBYID(cancellationToken, id);
+			           
+            return View(film);
+        }
+
+        [HttpGet]
 		[Route("[action]")]
 		public async Task<IActionResult> Profile(CancellationToken cancellationToken = default)
 		{

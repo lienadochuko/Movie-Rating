@@ -1,0 +1,246 @@
+﻿@model FilmDTO2
+@{
+	ViewData["Page"] = "FilmView";
+}
+<!-- container -->
+<div class="main-container container-fluid">
+
+	<!-- breadcrumb -->
+	<div class="breadcrumb-header justify-content-between">
+		<div class="left-content">
+			<span class="main-content-title mg-b-0 mg-b-lg-1">@ViewBag.Page</span>
+		</div>
+		<div class="justify-content-center mt-2">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item tx-15"><a href="javascript:void(0);">@ViewBag.Action</a></li>
+				<li class="breadcrumb-item active" aria-current="page">@ViewBag.Page</li>
+			</ol>
+		</div>
+	</div>
+	<!-- /breadcrumb -->
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			<div class="card custom-card">
+				<div class="card-body d-md-flex">
+					<div class="pos-relative">
+						<span class="profile-image">
+							<img class="br-5" alt=""
+								 src="data:image/png;base64,@Model.Poster">
+						</span>
+					</div>
+					<div class="my-md-auto mt-4 prof-details">
+						<h4 class="font-weight-semibold ms-md-4 ms-0 mb-1 pb-0">@Model.Title</h4>
+						<p class="tx-13 text-muted ms-md-4 ms-0 mb-2 pb-2 ">
+							<span class="me-3">
+								<i class="far fa-address-card me-2"></i>Ui/Ux
+								Developer
+							</span>
+							<span class="me-3"><i class="fa fa-taxi me-2"></i>West fransisco,Alabama</span>
+							<span><i class="far fa-flag me-2"></i>New Jersey</span>
+						</p>
+						<p class="text-muted ms-md-4 ms-0 mb-2">
+							<span>
+								<i class="fa fa-globe me-2"></i>
+							</span><span class="font-weight-semibold me-2">Username:</span><span>@Model.ReleaseDate</span>
+						</p>
+						<p class="text-muted ms-md-4 ms-0 mb-2">
+							<span>
+								<i class="fa fa-phone me-2"></i>
+							</span><span class="font-weight-semibold me-2">Phone:</span><span>@Model.Studio</span>
+						</p>
+						<p class="text-muted ms-md-4 ms-0 mb-2">
+							<span>
+								<i class="fa fa-envelope me-2"></i>
+							</span><span class="font-weight-semibold me-2">Email:</span><span>@Model.Review</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Row -->
+	<div class="row row-sm">
+		<div class="col-lg-12 col-md-12">
+			<div class="custom-card main-content-body-profile">
+				<div class="tab-content">
+					<div class="main-content-body tab-pane  active" id="about">
+						<div class="card">
+							<div class="card-body p-0 border-0 p-0 rounded-10">
+								<div class="p-4">
+									<h4 class="tx-15 text-uppercase mb-3">BIOdata</h4>
+									<p class="m-b-5">
+										Hi I'm Teri Dactyl,has been the industry's standard
+										dummy text ever since the 1500s, when an unknown printer took a
+										galley of type. Donec pede justo, fringilla vel, aliquet nec,
+										vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+										venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+										Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi.
+										Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
+										consequat vitae, eleifend ac, enim.
+									</p>
+									<div class="m-t-30">
+										<div class=" p-t-10">
+											<h5 class="text-primary m-b-5 tx-14">
+												Lead designer / Developer
+											</h5>
+											<p class="">websitename.com</p>
+											<p><b>2010-2015</b></p>
+											<p class="text-muted tx-13 m-b-0">
+												Lorem Ipsum is simply dummy
+												text of the printing and typesetting industry. Lorem Ipsum
+												has been the industry's standard dummy text ever since the
+												1500s, when an unknown printer took a galley of type and
+												scrambled it to make a type specimen book.
+											</p>
+										</div>
+
+										<div class="">
+											<h5 class="text-primary m-b-5 tx-14">
+												Senior Graphic Designer
+											</h5>
+											<p class="">coderthemes.com</p>
+											<p><b>2007-2009</b></p>
+											<p class="text-muted tx-13 mb-0">
+												Lorem Ipsum is simply dummy
+												text of the printing and typesetting industry. Lorem Ipsum
+												has been the industry's standard dummy text ever since the
+												1500s, when an unknown printer took a galley of type and
+												scrambled it to make a type specimen book.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="border-top"></div>
+								<div class="p-4">
+									<label class="main-content-label tx-13 mg-b-20">Statistics</label>
+									<div class="profile-cover__info ms-4 ms-auto p-0">
+										<ul class="nav p-0 border-bottom-0 mb-0">
+											<li class="border p-2 br-5 bg-light wd-100 ht-70">
+												<span class="border-0 mb-0 pb-0">113</span>Projects
+											</li>
+											<li class="border p-2 br-5 bg-light wd-100 ht-70">
+												<span class="border-0 mb-0 pb-0">245</span>Followers
+											</li>
+											<li class="border p-2 br-5 bg-light wd-100 ht-70">
+												<span class="border-0 mb-0 pb-0">128</span>Following
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="border-top"></div>
+								<div class="p-4">
+									<label class="main-content-label tx-13 mg-b-20">Contact</label>
+									<div class="d-sm-flex">
+										<div class="mg-sm-r-20 mg-b-10">
+											<div class="main-profile-contact-list">
+												<div class="media">
+													<div class="media-icon bg-primary-transparent text-primary">
+														<i class="icon ion-md-phone-portrait"></i>
+													</div>
+													<div class="media-body">
+														<span>Mobile</span>
+														<div> +245 354 654 </div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mg-sm-r-20 mg-b-10">
+											<div class="main-profile-contact-list">
+												<div class="media">
+													<div class="media-icon bg-success-transparent text-success">
+														<i class="icon ion-logo-slack"></i>
+													</div>
+													<div class="media-body">
+														<span>Slack</span>
+														<div> spruko.w </div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="">
+											<div class="main-profile-contact-list">
+												<div class="media">
+													<div class="media-icon bg-info-transparent text-info">
+														<i class="icon ion-md-locate"></i>
+													</div>
+													<div class="media-body">
+														<span>Current Address</span>
+														<div> San Francisco, CA </div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="border-top"></div>
+								<div class="p-4">
+									<label class="main-content-label tx-13 mg-b-20">Social</label>
+									<div class="d-lg-flex">
+										<div class="mg-md-r-20 mg-b-10">
+											<div class="main-profile-social-list">
+												<div class="media">
+													<div class="media-icon bg-primary-transparent text-primary">
+														<i class="icon ion-logo-github"></i>
+													</div>
+													<div class="media-body">
+														<span>Github</span> <a href="">github.com/spruko</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mg-md-r-20 mg-b-10">
+											<div class="main-profile-social-list">
+												<div class="media">
+													<div class="media-icon bg-success-transparent text-success">
+														<i class="icon ion-logo-twitter"></i>
+													</div>
+													<div class="media-body">
+														<span>Twitter</span> <a href="">twitter.com/spruko.me</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mg-md-r-20 mg-b-10">
+											<div class="main-profile-social-list">
+												<div class="media">
+													<div class="media-icon bg-info-transparent text-info">
+														<i class="icon ion-logo-linkedin"></i>
+													</div>
+													<div class="media-body">
+														<span>Linkedin</span> <a href="">linkedin.com/in/spruko</a>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="mg-md-r-20 mg-b-10">
+											<div class="main-profile-social-list">
+												<div class="media">
+													<div class="media-icon bg-danger-transparent text-danger">
+														<i class="icon ion-md-link"></i>
+													</div>
+													<div class="media-body">
+														<span>My Portfolio</span> <a href="">spruko.com/</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="main-content-body tab-pane  border-0" id="theme">
+						<div class="card">
+							<div class="card-body border-0" data-select2-id="12">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- row closed -->
+</div>
+<!-- Container closed -->

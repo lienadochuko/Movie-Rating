@@ -39,10 +39,12 @@ namespace Movie_Rating.Services
 	public class SignInService : ISignInService
 	{
 		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly IConfiguration _configuration;
 
-		public SignInService(IHttpContextAccessor httpContextAccessor)
+		public SignInService(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
 		{
 			_httpContextAccessor = httpContextAccessor;
+			_configuration = configuration;
 		}
 
 		[ServiceFilter(typeof(SessionCheckFilter))]
@@ -59,17 +61,17 @@ namespace Movie_Rating.Services
 
 			UserDTO userDTO = new()
 			{
-				Name = user?.name,
-				Gender = user?.gender,
-				Id = user?.id,
-				UserName = user?.userName,
-				NormalizedUserName = user?.normalizedUserName,
-				Email = user?.email,
-				NormalizedEmail = user?.normalizedEmail,
-				EmailConfirmed = user?.emailConfirmed,
-				PhoneNumber = user?.phoneNumber,
-				PhoneNumberConfirmed = user?.phoneNumberConfirmed,
-				TwoFactorEnabled = user?.twoFactorEnabled,
+				Name = user?.Name,
+				Gender = user?.Gender,
+				Id = user?.Id,
+				UserName = user?.UserName,
+				NormalizedUserName = user?.NormalizedUserName,
+				Email = user?.Email,
+				NormalizedEmail = user?.NormalizedEmail,
+				EmailConfirmed = user?.EmailConfirmed,
+				PhoneNumber = user?.PhoneNumber,
+				PhoneNumberConfirmed = user?.PhoneNumberConfirmed,
+				TwoFactorEnabled = user?.TwoFactorEnabled,
 			};
 
 			return userDTO;
@@ -159,12 +161,11 @@ namespace Movie_Rating.Services
 				// Extract the token and user email from the response
 				// Check if the token or user email is empty
 
-				string token = jsonResponse?.token;
-				var user = jsonResponse?.user;
-				string userImage = jsonResponse?.userImage;
+				var token = jsonResponse?.token;
+				var user = jsonResponse?.userJson;
+				var userImage = jsonResponse?.userImageJson;
 
-				if (string.IsNullOrEmpty(token)
-					|| user == null)
+				if (token == null || user == null || userImage == null)
 				{
 					return false;
 				}
@@ -176,28 +177,56 @@ namespace Movie_Rating.Services
 			}
 		}
 
-		public void SaveToken(string token, object userResponse, string userImage)
-		{
-			var response = _httpContextAccessor.HttpContext.Response;
-			var session = _httpContextAccessor.HttpContext.Session;
+        public void SaveToken(dynamic token, dynamic userResponse, dynamic userImage)
+        {
+            // Initialize the AES encryption service
+            var aes = new AES(_configuration["AesGcm:Key"]);
 
-			// Create cookie options
-			CookieOptions cookieOptions = new CookieOptions
-			{
-				HttpOnly = true,
-				Expires = DateTime.Now.AddHours(1),
-				Secure = true, // set to true if you're using HTTPS
-				SameSite = SameSiteMode.Strict
-			};
-			var user = JsonConvert.SerializeObject(userResponse);
+            // Deserialize and decrypt the token
+            var tokenData = JsonConvert.DeserializeObject<encrypt>(Convert.ToString(token));
+            var decryptedToken = aes.Decrypt(
+                Convert.FromBase64String(tokenData.EncryptedToken),
+                Convert.FromBase64String(tokenData.TagBase64),
+                Convert.FromBase64String(tokenData.NonceBase64)
+            );
 
-			// Add the cookies
-			response.Cookies.Append("jwtToken", token, cookieOptions);
-			response.Cookies.Append("userEmail", user, cookieOptions);
-			//response.Cookies.Append("userImage", userImage, cookieOptions);
+            // Deserialize and decrypt the user information
+            var userResponseData = JsonConvert.DeserializeObject<encrypt>(Convert.ToString(userResponse));
+            var decryptedUserResponse = aes.Decrypt(
+                Convert.FromBase64String(userResponseData.EncryptedToken),
+                Convert.FromBase64String(userResponseData.TagBase64),
+                Convert.FromBase64String(userResponseData.NonceBase64)
+            );
 
-			byte[] userImageBytes = Convert.FromBase64String(userImage);
-			session.Set("UserImage", userImageBytes);
-		}
-	}
+            // Deserialize and decrypt the user image
+            var userImageData = JsonConvert.DeserializeObject<encrypt>(Convert.ToString(userImage));
+            var decryptedUserImage = aes.Decrypt(
+                Convert.FromBase64String(userImageData.EncryptedToken),
+                Convert.FromBase64String(userImageData.TagBase64),
+                Convert.FromBase64String(userImageData.NonceBase64)
+            );
+
+            // Access the HTTP response and session
+            var response = _httpContextAccessor.HttpContext.Response;
+            var session = _httpContextAccessor.HttpContext.Session;
+
+            // Set up cookie options for security
+            CookieOptions cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.Now.AddHours(1),
+                Secure = true, // Ensure this is true in production (HTTPS)
+                SameSite = SameSiteMode.Strict
+            };
+
+            // Store decrypted data in cookies
+            response.Cookies.Append("jwtToken", decryptedToken, cookieOptions);
+            response.Cookies.Append("userEmail", decryptedUserResponse, cookieOptions);
+
+            // Convert decrypted user image back to bytes and save in session
+            byte[] userImageBytes = Convert.FromBase64String(decryptedUserImage);
+            session.Set("UserImage", userImageBytes);
+        }
+
+    }
 }

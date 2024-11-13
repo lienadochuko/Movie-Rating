@@ -62,7 +62,7 @@
                         <h4 class="card-title mb-1" style="width:90%; display:flex; justify-content:center; align-items:center; text-align:center;">@film.Title</h4>
                         @* <p class="card-text">@film.ReleaseDate</p> *@
                         <div class="read_like">
-                            <a class="btn btn-primary btn-block" href="#">Read More</a>
+                            <a class="btn btn-primary btn-block" asp-controller="Home" asp-action="FilmView" asp-route-id="@film.FilmID">Read More</a>
                         </div>
                     </div>
                 </div>

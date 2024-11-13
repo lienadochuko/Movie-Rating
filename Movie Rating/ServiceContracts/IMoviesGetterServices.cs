@@ -30,6 +30,12 @@ namespace Movie_Rating.ServiceContracts
         /// <returns>Returns a list of movies based on searched title</returns>
         Task<PaginatedFilmViewModel> GetFilmsByTitle(CancellationToken cancellationToken, string title, int pageNumber, int pageSize);
 
+		/// <summary>
+		/// Returns the FilmDTO object based on the given Film id
+		/// </summary>
+		/// <param name="GETFILMBYID"></param>
+		/// <returns>Return matching FilmDTO object </returns>
+		Task<FilmDTO2> GETFILMBYID(CancellationToken cancellationToken, int id);
 
 
         ///// <summary>
