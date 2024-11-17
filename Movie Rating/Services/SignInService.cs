@@ -95,7 +95,9 @@ namespace Movie_Rating.Services
 		public async Task<bool> Register(RegisterDTO registerDTO, string image, CancellationToken cancellationToken)
 		{
 			string apiUrl = "https://localhost:7291/Auth/Register";
-			Register register = new Register()
+            var aes = new AES(_configuration["AesGcm:Key"]);
+
+            Register register = new Register()
 			{
 				FirstName = registerDTO.FirstName,
 				LastName = registerDTO.LastName,
@@ -107,9 +109,19 @@ namespace Movie_Rating.Services
 				UserType = Enum.TryParse<UserTypeOptions>(registerDTO.UserType, out var userType) ? userType : default,
                 Image = image
             };
+			
+			var stringifiedData = JsonConvert.SerializeObject(register);
 
+			var encrpytedData = aes.Encrypt(stringifiedData);
 
-			var content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+			encrypt enc = new encrypt()
+			{
+                EncryptedToken = Convert.ToBase64String(encrpytedData.CipherText),
+                TagBase64 = Convert.ToBase64String(encrpytedData.Tag),
+                NonceBase64 = Convert.ToBase64String(encrpytedData.Nonce)
+            };
+
+			var content = new StringContent(JsonConvert.SerializeObject(enc), Encoding.UTF8, "application/json");
 
 			using (HttpClient client = new HttpClient())
 			{
@@ -161,7 +173,7 @@ namespace Movie_Rating.Services
 				// Extract the token and user email from the response
 				// Check if the token or user email is empty
 
-				var token = jsonResponse?.token;
+				string token = jsonResponse?.token;
 				var user = jsonResponse?.userJson;
 				var userImage = jsonResponse?.userImageJson;
 
@@ -177,18 +189,18 @@ namespace Movie_Rating.Services
 			}
 		}
 
-        public void SaveToken(dynamic token, dynamic userResponse, dynamic userImage)
+        public void SaveToken(string token, dynamic userResponse, dynamic userImage)
         {
             // Initialize the AES encryption service
             var aes = new AES(_configuration["AesGcm:Key"]);
 
             // Deserialize and decrypt the token
-            var tokenData = JsonConvert.DeserializeObject<encrypt>(Convert.ToString(token));
-            var decryptedToken = aes.Decrypt(
-                Convert.FromBase64String(tokenData.EncryptedToken),
-                Convert.FromBase64String(tokenData.TagBase64),
-                Convert.FromBase64String(tokenData.NonceBase64)
-            );
+            var tokenData = token;
+            //var decryptedToken = aes.Decrypt(
+            //    Convert.FromBase64String(tokenData.EncryptedToken),
+            //    Convert.FromBase64String(tokenData.TagBase64),
+            //    Convert.FromBase64String(tokenData.NonceBase64)
+            //);
 
             // Deserialize and decrypt the user information
             var userResponseData = JsonConvert.DeserializeObject<encrypt>(Convert.ToString(userResponse));
@@ -220,7 +232,7 @@ namespace Movie_Rating.Services
             };
 
             // Store decrypted data in cookies
-            response.Cookies.Append("jwtToken", decryptedToken, cookieOptions);
+            response.Cookies.Append("jwtToken", tokenData, cookieOptions);
             response.Cookies.Append("userEmail", decryptedUserResponse, cookieOptions);
 
             // Convert decrypted user image back to bytes and save in session

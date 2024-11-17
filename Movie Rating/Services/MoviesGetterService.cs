@@ -33,24 +33,24 @@ namespace Movie_Rating.Services
         {
             string apiUrl = $"https://localhost:7291/Movies/GETFILMS?pageNumber={pageNumber}&pageSize={pageSize}";
             string  bearerToken = GetTokenFromCookies();
-
+            var aes = new AES(configuration["AesGcm:Key"]);
             using (
                 HttpClient client = new HttpClient())
             {
                 
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
-                var aes = new AES(configuration["AesGcm:Key"]);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+              
 
-                var (cipherText, tag, nonce) = aes.Encrypt(bearerToken);
+                //var (cipherText, tag, nonce) = aes.Encrypt(bearerToken);
 
-                // Convert encrypted parts to Base64 for safe storage/transmission
-                string encryptedToken = Convert.ToBase64String(cipherText);
-                string tagBase64 = Convert.ToBase64String(tag);
-                string nonceBase64 = Convert.ToBase64String(nonce);
+                //// Convert encrypted parts to Base64 for safe storage/transmission
+                //string encryptedToken = Convert.ToBase64String(cipherText);
+                //string tagBase64 = Convert.ToBase64String(tag);
+                //string nonceBase64 = Convert.ToBase64String(nonce);
 
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encryptedToken}");
-                client.DefaultRequestHeaders.Add("Tag", tagBase64);
-                client.DefaultRequestHeaders.Add("Nonce", nonceBase64);
+                //client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encryptedToken}");
+                //client.DefaultRequestHeaders.Add("Tag", tagBase64);
+                //client.DefaultRequestHeaders.Add("Nonce", nonceBase64);
 
                 try
                 {
@@ -120,21 +120,13 @@ namespace Movie_Rating.Services
 		{
 			 string apiUrl = $"https://localhost:7291/Movies/GETFILMBYID?id={id}";
 			 string bearerToken = GetTokenFromCookies();
+            var aes = new AES(configuration["AesGcm:Key"]);
 
 			using (HttpClient client = new HttpClient())
 			{
-                
-                var aes = new AES(configuration["AesGcm:Key"]);
-                var (cipherText, tag, nonce) = aes.Encrypt(bearerToken);
 
-                // Convert encrypted parts to Base64 for safe storage/transmission
-                string encryptedToken = Convert.ToBase64String(cipherText);
-                string tagBase64 = Convert.ToBase64String(tag);
-                string nonceBase64 = Convert.ToBase64String(nonce);
 
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encryptedToken}");
-                client.DefaultRequestHeaders.Add("Tag", tagBase64);
-                client.DefaultRequestHeaders.Add("Nonce", nonceBase64);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
 
                 try
 				{
@@ -237,20 +229,12 @@ namespace Movie_Rating.Services
         {
             string apiUrl = $"https://localhost:7291/Movies/GETFILMBYTITLE?title={Uri.EscapeDataString(title)}&pageNumber={pageNumber}&pageSize={pageSize}";
             string bearerToken = GetTokenFromCookies();
+            var aes = new AES(configuration["AesGcm:Key"]);
 
             using (HttpClient client = new HttpClient())
-            {                
-                var aes = new AES(configuration["AesGcm:Key"]);
-                var (cipherText, tag, nonce) = aes.Encrypt(bearerToken);
+            {
 
-                // Convert encrypted parts to Base64 for safe storage/transmission
-                string encryptedToken = Convert.ToBase64String(cipherText);
-                string tagBase64 = Convert.ToBase64String(tag);
-                string nonceBase64 = Convert.ToBase64String(nonce);
-
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {encryptedToken}");
-                client.DefaultRequestHeaders.Add("Tag", tagBase64);
-                client.DefaultRequestHeaders.Add("Nonce", nonceBase64);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
 
                 try
                 {
