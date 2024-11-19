@@ -179,6 +179,7 @@ namespace Movie_Rating.Services
                             OscarWins = 0,
                             Poster = "",
                             Rating = "",
+                            LikeCount = 0,
                         };
 					}
 				}
@@ -221,6 +222,7 @@ namespace Movie_Rating.Services
 					OscarWins = 0,
 					Poster = "",
 					Rating = "",
+					LikeCount = 0,
 				};
 			}
 		}

@@ -9,6 +9,7 @@ namespace Movie_Rating.Models
 		public string Title { get; set; }
 		public string? Poster { get; set; }
         public string? Rating { get; set; }
+        public int LikeCount { get; set; }
     }
 
 }

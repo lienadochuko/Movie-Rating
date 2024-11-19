@@ -93,7 +93,7 @@ namespace Movie_Rating.ApiController
 		}
 
 
-        [Route("Home/[action]/{id}")]
+        [Route("[action]/{id}")]
         [HttpGet]
         public async Task<IActionResult> FilmView ( int id, CancellationToken cancellationToken)
         {

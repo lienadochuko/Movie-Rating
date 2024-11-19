@@ -27,6 +27,7 @@
 						<span class="profile-image">
 							<img class="br-5" alt=""
 								 src="data:image/png;base64,@Model.Poster">
+							<i class="fa-solid fa-thumbs-up Liked"></i>
 						</span>
 					</div>
 					<div class="my-md-auto mt-4 prof-details">
@@ -37,7 +38,18 @@
 								Developer
 							</span>
 							<span class="me-3"><i class="fa fa-taxi me-2"></i>West fransisco,Alabama</span>
-							<span><i class="far fa-flag me-2"></i>New Jersey</span>
+							@if (Model.LikeCount == 0)
+							{
+								<span href="javascript:void(0)" class="icon remove-thumb d-none d-md-inline-block">
+									<i class="far fa-thumbs-up"></i>
+								</span>
+							}
+							else
+							{
+								<span href="javascript:void(0)" class="icon remove-thumb d-none d-md-inline-block">
+									
+								</span>
+							}
 						</p>
 						<p class="text-muted ms-md-4 ms-0 mb-2">
 							<span>

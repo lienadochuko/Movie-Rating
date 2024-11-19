@@ -25,5 +25,6 @@
         public byte? OscarWins { get; set; }
         public string? Poster { get; set; }
         public string? Rating { get; set; }
-    }
+		public int LikeCount { get; set; }
+	}
 }
