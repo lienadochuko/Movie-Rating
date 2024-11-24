@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Movie_Rating.Models.DTO;
+using Movie_Rating.ServiceContracts;
 using Movie_Rating.Services;
 
 namespace Movie_Rating.ApiController
 {
     [Route("[controller]")]
     [ApiController]
-    public class SimosController(ISignInService signInService) : ControllerBase
+    public class SimosController(ISignInService signInService, 
+        IMoviesUpdaterServices moviesUpdaterServices) : ControllerBase
     {
         [Route("[Action]")]
         [HttpPost]
@@ -50,7 +52,40 @@ namespace Movie_Rating.ApiController
 			return Ok();
         }
 
-        private string GenerateRandomString(int length)
+		[Route("[action]/{Id:int}")]
+		[HttpPost]
+		public async Task<IActionResult> Like(int Id, CancellationToken cancellationToken = default)
+		{
+			if (Id <= 0)
+			{
+				return BadRequest("Invalid Film ID.");
+			}
+
+			UserDTO user = await signInService.getUser();
+			if (user == null)
+			{
+				return Unauthorized("User is not authenticated.");
+			}
+
+			try
+			{
+				bool result = await moviesUpdaterServices.AddUserFilmLike(cancellationToken, Id, user.Id.ToString());
+
+				if (!result)
+				{
+					return BadRequest("Failed to update like status.");
+				}
+
+				return Ok(true);
+			}
+			catch (Exception ex)
+			{				
+				return StatusCode(500, "An error occurred while processing your request.");
+			}
+		}
+
+
+		private string GenerateRandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             Random random = new Random();

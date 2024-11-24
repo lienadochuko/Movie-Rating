@@ -16,6 +16,7 @@ using Movie_Rating.Models.DTO;
 using Movie_Rating.Helpers;
 using Movie_Rating.Models;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Movie_Rating.Services
 {
@@ -67,16 +68,47 @@ namespace Movie_Rating.Services
                 return false;
             }
         }
+				
+		public async Task<bool> AddUserFilmLike(CancellationToken cancellationToken, int FilmID, string UserID)
+		{
+			string apiUrl = "https://localhost:7291/Movies/AddUserFilmLike";
+			string bearerToken = GetTokenFromCookies();
+			var aes = new AES(configuration["AesGcm:Key"]);
+
+			Like like = new Like() 
+			{
+				FilmID = FilmID,
+				UserID = UserID,
+			};
+			var likeString = JsonConvert.SerializeObject(like);
+
+			var encrypted = aes.Encrypt(likeString);
+
+			var content = new StringContent(JsonConvert.SerializeObject(encrypted), Encoding.UTF8, "application/json");
+
+			using (HttpClient client = new HttpClient())
+			{
+				client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+				var response = await client.PostAsync(apiUrl, content);
+
+				if (response.IsSuccessStatusCode)
+				{
+					return true;
+				}
+
+				return false;
+			}
+		}
 
 
-        /// <summary>
-        /// Updates the actor's details
-        /// </summary>
-        /// <param name="actorsUpdateRequest"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>returns truev if updated, else false</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public async Task<bool> UpdateActors(ActorsUpdateRequest actorsUpdateRequest, CancellationToken cancellationToken)
+		/// <summary>
+		/// Updates the actor's details
+		/// </summary>
+		/// <param name="actorsUpdateRequest"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns>returns truev if updated, else false</returns>
+		/// <exception cref="ArgumentNullException"></exception>
+		public async Task<bool> UpdateActors(ActorsUpdateRequest actorsUpdateRequest, CancellationToken cancellationToken)
         {
             if (actorsUpdateRequest == null)
                 throw new ArgumentNullException(nameof(actorsUpdateRequest));
@@ -107,10 +139,10 @@ namespace Movie_Rating.Services
 			}
 
 
-			public string GetTokenFromCookies()
-			{
-				var Request = _httpContextAccessor.HttpContext.Request;
-				return Request.Cookies["jwtToken"];
-			}
+		public string GetTokenFromCookies()
+		{
+			var Request = _httpContextAccessor.HttpContext.Request;
+			return Request.Cookies["jwtToken"];
 		}
+	}
 }

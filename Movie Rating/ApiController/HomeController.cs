@@ -97,7 +97,7 @@ namespace Movie_Rating.ApiController
         [HttpGet]
         public async Task<IActionResult> FilmView ( int id, CancellationToken cancellationToken)
         {
-            ViewBag.Action = "Home";
+            ViewBag.Action = "FilmView";
 
             User();
 
@@ -110,7 +110,7 @@ namespace Movie_Rating.ApiController
 		[Route("[action]")]
 		public async Task<IActionResult> Profile(CancellationToken cancellationToken = default)
 		{
-			ViewBag.Action = "Home";
+			ViewBag.Action = "Profile";
 
 			User();
 
@@ -118,7 +118,6 @@ namespace Movie_Rating.ApiController
 
 			return View(user);
 		}
-
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

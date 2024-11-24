@@ -14,5 +14,8 @@ namespace Movie_Rating.ServiceContracts
         Task<bool> UpdateFilmPosters(CancellationToken cancellationToken);
 
 		Task<bool> UpdateActors(ActorsUpdateRequest actorsUpdateRequest, CancellationToken cancellationToken);
-    }
+
+        Task<bool> AddUserFilmLike(CancellationToken cancellationToken, int FilmID, string UserID);
+
+	}
 }
