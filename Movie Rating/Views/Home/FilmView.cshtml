@@ -29,15 +29,15 @@
 
 							@if (Model.LikeCount != 0)
 							{
-								<a class="Liked Liked1" asp-controller="Simos" asp-action="Like" asp-route-id="@Model.FilmID">
+								<button type="button" class="Liked Liked1" onclick="likeAction(@Model.FilmID)">
 									<i class="fa-solid fa-thumbs-up"></i>
-								</a>
+								</button>
 							}
 							else
 							{
-								<a class="Liked Liked2" asp-controller="Simos" asp-action="Like" asp-route-id="@Model.FilmID">
+								<button type="button" class="Liked Liked2" onclick="likeAction(@Model.FilmID)">
 									<i class="fa-solid fa-thumbs-up"></i>
-								</a>
+								</button>
 							}
 						</span>
 					</div>

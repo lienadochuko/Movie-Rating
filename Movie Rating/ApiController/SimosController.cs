@@ -52,8 +52,7 @@ namespace Movie_Rating.ApiController
 			return Ok();
         }
 
-		[Route("[action]/{Id:int}")]
-		[HttpPost]
+		[HttpGet("[action]/{Id}")]
 		public async Task<IActionResult> Like(int Id, CancellationToken cancellationToken = default)
 		{
 			if (Id <= 0)
@@ -83,7 +82,6 @@ namespace Movie_Rating.ApiController
 				return StatusCode(500, "An error occurred while processing your request.");
 			}
 		}
-
 
 		private string GenerateRandomString(int length)
         {

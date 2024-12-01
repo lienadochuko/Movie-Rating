@@ -82,7 +82,14 @@ namespace Movie_Rating.Services
 			};
 			var likeString = JsonConvert.SerializeObject(like);
 
-			var encrypted = aes.Encrypt(likeString);
+			var ressult = aes.Encrypt(likeString);
+
+            encrypt encrypted = new encrypt()
+            {
+                EncryptedToken = Convert.ToBase64String(ressult.CipherText),
+                TagBase64 = Convert.ToBase64String(ressult.Tag),
+                NonceBase64 = Convert.ToBase64String(ressult.Nonce)
+            };
 
 			var content = new StringContent(JsonConvert.SerializeObject(encrypted), Encoding.UTF8, "application/json");
 
